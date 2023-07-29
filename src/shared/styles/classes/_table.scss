@@ -1,5 +1,4 @@
 @use "../abstracts/colors" as *;
-@use "../abstracts/fonts" as *;
 
 // ? table section style
 .full-screen-table {
@@ -21,6 +20,9 @@
     // border-radius: 0px 0px 3px 3px !important;
 
     table {
+        th{
+            text-align: right !important;
+        }
         overflow-x: scroll !important;
         overflow-y: auto !important;
         z-index: 10 !important;

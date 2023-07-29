@@ -2,15 +2,18 @@
     <mat-drawer position="end" #drawer [mode]="'over'" class="">
         <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
     </mat-drawer>
-    <mat-drawer-content class="h-100 d-flex flex-wrap justify-content-center align-items-start">
+    <mat-drawer-content class="h-100 d-flex flex-wrap justify-content-center align-items-start system_color__white-2">
         <header class="col-12 d-flex flex-wrap justify-content-between main-header">
             <button mat-icon-button class="system_color__white" (click)="drawer.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
         </header>
 
-        <article class="outlet-con col-12">
-            <router-outlet></router-outlet>
+
+        <article class="outlet-con col-12 bg-system_color__white overflow-hidden">
+            <div class="col-12 h-100 c-card p-2" style="min-height: 100%; height: 100%;">
+                <router-outlet></router-outlet>
+            </div>
         </article>
 
     </mat-drawer-content>
