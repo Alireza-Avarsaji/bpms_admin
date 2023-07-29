@@ -1,1 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
+@use "./shared/styles/abstracts" as *;
+@import "./shared/styles/typography.scss";
+
+
+html,
+body {
+    height: 100%;
+    direction: rtl;
+}
+
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: 100% !important;
+}
+
+div,
+li,
+strong,
+input,
+small,
+button,
+label,
+textarea,
+select,
+select option,
+mat-card-subtitle,
+mat-card-title,
+mat-hint,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+pre,
+a,
+th,
+td,
+mat-card-title {
+    @include ESTEDAD_REGULAR;
+    font-weight: normal;
+    cursor: default;
+    margin: 0;
+    text-align: right;
+    outline: none;
+}
+
+input {
+    cursor: auto !important;
+}
+
+button {
+    span {
+        cursor: pointer !important;
+    }
+
+    &:disabled {
+        background-color: #E8E8E8 !important;
+        color: gray !important;
+        cursor: default;
+
+        .mat-button-wrapper {
+            cursor: default !important;
+        }
+    }
+}
+    
