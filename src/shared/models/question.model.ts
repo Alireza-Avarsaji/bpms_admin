@@ -9,6 +9,10 @@ export class SubQuestionModel {
     type!: QuestionTypesEnum;
     values!: string[];
     validations!:  ValidationModel[];
+
+    constructor() {
+        this.values = [];
+    }
 }
 
 export interface INameValue {

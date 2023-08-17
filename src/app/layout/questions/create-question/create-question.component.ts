@@ -10,7 +10,7 @@ import { INameValue, QuestionModel, QuestionTypesEnum, SubQuestionModel } from '
 export class CreateQuestionComponent implements OnInit {
 
   question!: QuestionModel;
-  subQuestions: SubQuestionModel[] = [new SubQuestionModel()];
+  subQuestions: SubQuestionModel[] = [new SubQuestionModel(), new SubQuestionModel()];
   QuestionMenuItems: INameValue[] = QuestionTypeList;
   questionTypeEnum = QuestionTypesEnum;
 
@@ -19,6 +19,7 @@ export class CreateQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.subQuestions[0].type = this.questionTypeEnum.text;
+    this.subQuestions[1].type = this.questionTypeEnum.single_select;
     
   }
 

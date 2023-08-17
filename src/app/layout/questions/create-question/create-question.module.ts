@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { CreateQuestionComponent } from './create-question.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { QTextComponent } from 'src/shared/components/subQuestions/q-text/q-text.component';
+import { QSingleSelectComponent } from 'src/shared/components/subQuestions/q-single-select/q-single-select.component';
 
 
 
@@ -32,7 +33,8 @@ const routes: Routes = [
     NgxSkeletonLoaderModule,
     CommonModule,
     MatMenuModule,
-    QTextComponent
+    QTextComponent,
+    QSingleSelectComponent
   ],
   providers: [],
 })
