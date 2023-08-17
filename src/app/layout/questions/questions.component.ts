@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { CreateQuestionComponent } from 'src/shared/components/create-question/create-question.component';
+import { Router } from '@angular/router';
 import { configHeaderModel } from 'src/shared/components/table-header/table-header.component';
 
 @Component({
@@ -83,16 +82,14 @@ export class QuestionsComponent implements OnInit {
     }
   ];
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     
   }
 
   createQuestion() {
-    const ref = this.dialog.open(CreateQuestionComponent, {
-      
-    }) 
+    this.router.navigate(['/layout/questions/create'])
   }
 
   search(page?: number) {

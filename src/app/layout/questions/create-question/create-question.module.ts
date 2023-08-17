@@ -1,47 +1,39 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { QuestionsComponent } from './questions.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { TableHeaderComponent } from 'src/shared/components/table-header/table-header.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { PagingComponent } from 'src/shared/components/paging/paging.component';
-import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { CreateQuestionComponent } from './create-question.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { QTextComponent } from 'src/shared/components/subQuestions/q-text/q-text.component';
 
 
 
 const routes: Routes = [
   {
     path: '',
-    component: QuestionsComponent,
-  },
-  {
-    path: 'create',
-    loadChildren: () => import('./create-question/create-question.module').then(m => m.CreateQuestionModule)
+    component: CreateQuestionComponent,
   }
 ];
 
 @NgModule({
   declarations: [
-    QuestionsComponent
+    CreateQuestionComponent
   ],
   imports: [
     RouterModule.forChild(routes),
-    MatSidenavModule,
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
     MatInputModule,
-    TableHeaderComponent,
     NgxSkeletonLoaderModule,
-    PagingComponent,
-    MatTableModule,
-    CommonModule
+    CommonModule,
+    MatMenuModule,
+    QTextComponent
   ],
   providers: [],
 })
-export class QuestionsModule { }
+export class CreateQuestionModule { }

@@ -1,0 +1,47 @@
+<section class="h-100 w-100 d-flex flex-wrap justify-content-center align-content-center p-4 position-relative">
+    <!-- <header class="col-12 d-flex justify-content-between mb-4">
+        <span>ایجاد سوال</span>
+        <mat-icon>close</mat-icon>
+    </header> -->
+
+    <article class="h-100 col-12 col-md-9 col-lg-7 d-flex flex-wrap justify-content-center align-content-start"
+        *ngIf="subQuestions.length > 0 else placeholder">
+
+        <div *ngFor="let sub of subQuestions; let i = index" [ngSwitch]="sub.type" class="col-12">
+
+            <label class="neutral_variant__shade-10 mb-2">زیر سوال شماره {{i + 1}}</label>
+
+            <ng-container *ngSwitchCase="questionTypeEnum.text" class="w-100 h-100">
+                <app-q-text></app-q-text>
+            </ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.single_select">asdf</ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.multi_select">asdf</ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.range">erg</ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.date">etrh</ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.time">trh</ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.file">sadf</ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.radio">asdfergh</ng-container>
+
+
+        </div>
+
+
+    </article>
+
+    <ng-template #placeholder>
+        <p class="neutral_variant__shade-10">پرسشی موجود نیست</p>
+    </ng-template>
+
+    <button mat-fab class="bg-neutral_variant__shade-10 system_color__white add-btn" [matMenuTriggerFor]="menu">
+        <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let item of QuestionMenuItems" (click)="addSubQuestion(item)">
+            {{item.name}}
+        </button>
+    </mat-menu>
+
+
+
+</section>

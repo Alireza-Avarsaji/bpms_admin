@@ -1,13 +1,30 @@
+
 export class QuestionModel {
     title!: string;
-    options!: OptionsModel[];
+    options!: SubQuestionModel[];
 }
 
-export class OptionsModel {
+export class SubQuestionModel {
     key!: string;
-    type!: OptionTypeEnum;
+    type!: QuestionTypesEnum;
     values!: string[];
     validations!:  ValidationModel[];
+}
+
+export interface INameValue {
+    name: string;
+    value: any;
+}
+
+export enum QuestionTypesEnum {
+    text,
+    single_select,
+    multi_select,
+    range,
+    date,
+    time,
+    file,
+    radio
 }
 
 export class ValidationModel {
@@ -23,14 +40,3 @@ export enum ValidationTypeEnum {
     regex
 }
 
-
-export enum OptionTypeEnum {
-    text,
-    single_select,
-    multi_select,
-    range,
-    date,
-    time,
-    file,
-    radio
-}

@@ -1,0 +1,12 @@
+.add-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+// ? for mat menu
+::ng-deep {
+    .cdk-overlay-connected-position-bounding-box {
+        width: unset !important;
+    }
+}
