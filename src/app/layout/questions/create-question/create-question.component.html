@@ -9,7 +9,7 @@
 
         <div *ngFor="let sub of subQuestions; let i = index" [ngSwitch]="sub.type" class="col-12 mb-5">
 
-            <label class="neutral_variant__shade-10 mb-2">زیر سوال شماره {{i + 1}}</label>
+            <label class="neutral_variant__shade-10 mb-3">زیر سوال شماره {{i + 1}}</label>
 
             <ng-container *ngSwitchCase="questionTypeEnum.text" class="w-100 h-100">
                 <app-q-text></app-q-text>
@@ -17,7 +17,9 @@
             <ng-container *ngSwitchCase="questionTypeEnum.single_select">
                 <app-q-single-select></app-q-single-select>
             </ng-container>
-            <ng-container *ngSwitchCase="questionTypeEnum.multi_select">asdf</ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.multi_select">
+                <app-q-multi-select></app-q-multi-select>
+            </ng-container>
             <ng-container *ngSwitchCase="questionTypeEnum.range">erg</ng-container>
             <ng-container *ngSwitchCase="questionTypeEnum.date">etrh</ng-container>
             <ng-container *ngSwitchCase="questionTypeEnum.time">trh</ng-container>

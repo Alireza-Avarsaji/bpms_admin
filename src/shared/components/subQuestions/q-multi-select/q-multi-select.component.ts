@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
 import { SubQuestionModel } from 'src/shared/models/question.model';
 import { SharedModule } from 'src/shared/shared.module';
 
-
 @Component({
-  selector: 'app-q-single-select',
-  templateUrl: './q-single-select.component.html',
-  styleUrls: ['./q-single-select.component.scss'],
+  selector: 'app-q-multi-select',
+  templateUrl: './q-multi-select.component.html',
+  styleUrls: ['./q-multi-select.component.scss'],
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -28,7 +25,7 @@ import { SharedModule } from 'src/shared/shared.module';
     SharedModule
   ]
 })
-export class QSingleSelectComponent {
+export class QMultiSelectComponent {
 
   public sub: SubQuestionModel = new SubQuestionModel();
 
@@ -64,4 +61,5 @@ export class QSingleSelectComponent {
     this.sub.values.push(value);
     event.chipInput!.clear();
   }
+
 }
