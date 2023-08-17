@@ -20,8 +20,12 @@
             <ng-container *ngSwitchCase="questionTypeEnum.multi_select">
                 <app-q-multi-select></app-q-multi-select>
             </ng-container>
-            <ng-container *ngSwitchCase="questionTypeEnum.range">erg</ng-container>
-            <ng-container *ngSwitchCase="questionTypeEnum.date">etrh</ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.range">
+                <app-q-range></app-q-range>
+            </ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.date">
+                <app-q-date></app-q-date>
+            </ng-container>
             <ng-container *ngSwitchCase="questionTypeEnum.time">trh</ng-container>
             <ng-container *ngSwitchCase="questionTypeEnum.file">sadf</ng-container>
             <ng-container *ngSwitchCase="questionTypeEnum.radio">asdfergh</ng-container>

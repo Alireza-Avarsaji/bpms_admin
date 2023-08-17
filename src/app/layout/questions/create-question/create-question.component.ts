@@ -10,7 +10,7 @@ import { INameValue, QuestionModel, QuestionTypesEnum, SubQuestionModel } from '
 export class CreateQuestionComponent implements OnInit {
 
   question!: QuestionModel;
-  subQuestions: SubQuestionModel[] = [new SubQuestionModel(), new SubQuestionModel(), new SubQuestionModel()];
+  subQuestions: SubQuestionModel[] = [new SubQuestionModel(), new SubQuestionModel(), new SubQuestionModel(), new SubQuestionModel(), new SubQuestionModel()];
   QuestionMenuItems: INameValue[] = QuestionTypeList;
   questionTypeEnum = QuestionTypesEnum;
 
@@ -21,6 +21,8 @@ export class CreateQuestionComponent implements OnInit {
     this.subQuestions[0].type = this.questionTypeEnum.text;
     this.subQuestions[1].type = this.questionTypeEnum.single_select;
     this.subQuestions[2].type = this.questionTypeEnum.multi_select;
+    this.subQuestions[3].type = this.questionTypeEnum.range;
+    this.subQuestions[4].type = this.questionTypeEnum.date;
     
   }
 

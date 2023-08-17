@@ -10,6 +10,8 @@ import { QTextComponent } from 'src/shared/components/subQuestions/q-text/q-text
 import { QSingleSelectComponent } from 'src/shared/components/subQuestions/q-single-select/q-single-select.component';
 import { SharedModule } from 'src/shared/shared.module';
 import { QMultiSelectComponent } from 'src/shared/components/subQuestions/q-multi-select/q-multi-select.component';
+import { QRangeComponent } from 'src/shared/components/subQuestions/q-range/q-range.component';
+import { QDateComponent } from 'src/shared/components/subQuestions/q-date/q-date.component';
 
 
 
@@ -34,7 +36,9 @@ const routes: Routes = [
     MatMenuModule,
     QTextComponent,
     QSingleSelectComponent,
-    QMultiSelectComponent
+    QMultiSelectComponent,
+    QRangeComponent,
+    QDateComponent
   ],
   providers: [],
 })
