@@ -14,6 +14,7 @@ import { QRangeComponent } from 'src/shared/components/subQuestions/q-range/q-ra
 import { QDateComponent } from 'src/shared/components/subQuestions/q-date/q-date.component';
 import { QTimeComponent } from 'src/shared/components/subQuestions/q-time/q-time.component';
 import { QFileComponent } from 'src/shared/components/subQuestions/q-file/q-file.component';
+import { QRadioComponent } from 'src/shared/components/subQuestions/q-radio/q-radio.component';
 
 
 
@@ -42,7 +43,8 @@ const routes: Routes = [
     QRangeComponent,
     QDateComponent,
     QTimeComponent,
-    QFileComponent
+    QFileComponent,
+    QRadioComponent
   ],
   providers: [],
 })

@@ -1,4 +1,5 @@
-<section class="h-100 w-100 d-flex flex-wrap justify-content-center align-content-center p-4 position-relative overflow-auto">
+<section
+    class="h-100 w-100 d-flex flex-wrap justify-content-center align-content-center p-4 position-relative overflow-auto">
     <!-- <header class="col-12 d-flex justify-content-between mb-4">
         <span>ایجاد سوال</span>
         <mat-icon>close</mat-icon>
@@ -32,7 +33,9 @@
             <ng-container *ngSwitchCase="questionTypeEnum.file">
                 <app-q-file></app-q-file>
             </ng-container>
-            <ng-container *ngSwitchCase="questionTypeEnum.radio">asdfergh</ng-container>
+            <ng-container *ngSwitchCase="questionTypeEnum.radio">
+                <app-q-radio></app-q-radio>
+            </ng-container>
 
 
         </div>
