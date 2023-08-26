@@ -12,6 +12,8 @@ import { SharedModule } from 'src/shared/shared.module';
 import { QMultiSelectComponent } from 'src/shared/components/subQuestions/q-multi-select/q-multi-select.component';
 import { QRangeComponent } from 'src/shared/components/subQuestions/q-range/q-range.component';
 import { QDateComponent } from 'src/shared/components/subQuestions/q-date/q-date.component';
+import { QTimeComponent } from 'src/shared/components/subQuestions/q-time/q-time.component';
+import { QFileComponent } from 'src/shared/components/subQuestions/q-file/q-file.component';
 
 
 
@@ -38,7 +40,9 @@ const routes: Routes = [
     QSingleSelectComponent,
     QMultiSelectComponent,
     QRangeComponent,
-    QDateComponent
+    QDateComponent,
+    QTimeComponent,
+    QFileComponent
   ],
   providers: [],
 })
