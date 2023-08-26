@@ -52,8 +52,11 @@
     </button>
 
     <mat-menu #menu="matMenu">
-        <button mat-menu-item *ngFor="let item of QuestionMenuItems" (click)="addSubQuestion(item)">
-            {{item.name}}
+        <button class="col-12 p-0 cursor-pointer px-3" mat-menu-item *ngFor="let item of QuestionMenuItems" (click)="addSubQuestion(item)">
+            <div class="col-12 d-flex justify-content-between" style="cursor: pointer !important;">
+                <span>{{item.name}}</span>
+                <mat-icon class="neutral_variant__shade-10">{{item.value | qTypeIcon}}</mat-icon>
+            </div>
         </button>
     </mat-menu>
 

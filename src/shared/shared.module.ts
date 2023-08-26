@@ -4,15 +4,18 @@ import { CommonModule } from '@angular/common';
 import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { JALALI_MOMENT_FORMATS, MOMENT_FORMATS } from './helper/date-picker/jalali_moment_formats';
 import { JalaliMomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from './helper/date-picker/material.persian-date.adapter';
+import { SharedPipesModule } from './pipes/sharedPipes.module';
 
 @NgModule({
   imports: [
     MatIconModule,
-    CommonModule
+    CommonModule,
+    SharedPipesModule
   ],
   exports: [
     MatIconModule,
-    CommonModule
+    CommonModule,
+    SharedPipesModule
   ],
   providers: [
     {
