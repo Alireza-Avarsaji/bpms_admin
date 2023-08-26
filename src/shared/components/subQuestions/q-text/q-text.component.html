@@ -11,7 +11,7 @@
     </mat-form-field>
     
     <label class="neutral_variant__shade-10 mb-3">تنظیمات</label>
-    <div class="d-flex flex-wrap justify-content-between align-content-center align-items-center">
+    <div class="col-12 d-flex flex-wrap justify-content-between align-content-center align-items-center">
         <mat-form-field  appearance="outline">
             <mat-label>بیشترین مقدار</mat-label>
             <input formControlName="max" matInput placeholder="بیشترین مقدار" type="text">
@@ -24,7 +24,10 @@
             <mat-label>الگو</mat-label>
             <input formControlName="regex" matInput placeholder="الگو" type="text">
         </mat-form-field>
-        <mat-slide-toggle formControlName="isRequired">الزامی</mat-slide-toggle>
+        <div class="col-12 d-flex justify-content-end">
+            <mat-slide-toggle formControlName="isRequired">الزامی</mat-slide-toggle>
+        </div>
     </div>
+
 
 </form>
