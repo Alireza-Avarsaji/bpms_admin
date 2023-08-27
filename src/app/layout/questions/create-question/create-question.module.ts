@@ -15,6 +15,8 @@ import { QDateComponent } from 'src/shared/components/subQuestions/q-date/q-date
 import { QTimeComponent } from 'src/shared/components/subQuestions/q-time/q-time.component';
 import { QFileComponent } from 'src/shared/components/subQuestions/q-file/q-file.component';
 import { QRadioComponent } from 'src/shared/components/subQuestions/q-radio/q-radio.component';
+import { StoreModule } from '@ngrx/store';
+import { questionReducer } from './state/question.reducer';
 
 
 
@@ -44,7 +46,8 @@ const routes: Routes = [
     QDateComponent,
     QTimeComponent,
     QFileComponent,
-    QRadioComponent
+    QRadioComponent,
+    StoreModule.forFeature('questions', questionReducer),
   ],
   providers: [],
 })

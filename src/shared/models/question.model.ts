@@ -32,7 +32,7 @@ export enum QuestionTypesEnum {
 }
 
 export class ValidationModel {
-    type!: ValidationTypeEnum;;
+    type!: ValidationTypeEnum;
     value!: string;
 }
 
