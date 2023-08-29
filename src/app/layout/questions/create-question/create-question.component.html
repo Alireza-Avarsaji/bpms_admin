@@ -17,16 +17,16 @@
                     <app-q-text [id]="sub.id" (valueChanged)="onSubValueChanged($event)"></app-q-text>
                 </ng-container>
                 <ng-container *ngSwitchCase="questionTypeEnum.single_select">
-                    <app-q-single-select></app-q-single-select>
+                    <app-q-single-select [id]="sub.id" (valueChanged)="onSubValueChanged($event)"></app-q-single-select>
                 </ng-container>
                 <ng-container *ngSwitchCase="questionTypeEnum.multi_select">
-                    <app-q-multi-select></app-q-multi-select>
+                    <app-q-multi-select [id]="sub.id" (valueChanged)="onSubValueChanged($event)"></app-q-multi-select>
                 </ng-container>
                 <ng-container *ngSwitchCase="questionTypeEnum.range">
-                    <app-q-range></app-q-range>
+                    <app-q-range [id]="sub.id" (valueChanged)="onSubValueChanged($event)"></app-q-range>
                 </ng-container>
                 <ng-container *ngSwitchCase="questionTypeEnum.date">
-                    <app-q-date></app-q-date>
+                    <app-q-date [id]="sub.id" (valueChanged)="onSubValueChanged($event)"></app-q-date>
                 </ng-container>
                 <ng-container *ngSwitchCase="questionTypeEnum.time">
                     <app-q-time></app-q-time>

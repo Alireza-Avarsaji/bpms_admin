@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { QuestionFormTypes } from "./models";
+import { QuestionFormTypes } from "./question.state.model";
 
 export const AddSubQuestion = createAction(
     '[Question] AddSubQuestion',

@@ -8,15 +8,14 @@
     <mat-form-field class="col-12 mb-4" appearance="fill">
         <mat-select [disabled]="true" placeholder="پاسخ کاربر">
         </mat-select>
-        <!-- <mat-error>وارد کردن این فیلد الزامی است</mat-error> -->
     </mat-form-field>
 
     <div class="col-12 d-flex flex-wrap justify-content-between align-content-center align-items-center mb-3">
         <label class="neutral_variant__shade-10 mb-3">گزینه ها</label>
 
         <mat-form-field appearance="outline" class="col-8 col-sm-12 p-0">
-            <mat-chip-grid #chipList aria-label="پرسنل">
-              <mat-chip-row *ngFor=" let value of sub.values; let i = index"
+            <mat-chip-grid  formControlName="values" #chipList aria-label="پرسنل">
+              <mat-chip-row *ngFor=" let value of form.controls['values'].value; let i = index"
                 [removable]="true" (removed)="removeValue(i)">
                 {{value}}
                 <mat-icon matChipRemove>cancel</mat-icon>

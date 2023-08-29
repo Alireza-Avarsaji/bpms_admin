@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { SubQuestionModel } from 'src/shared/models/question.model';
 import { SharedModule } from 'src/shared/shared.module';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatSliderModule } from '@angular/material/slider';
+import { QRangeFormModel } from './q-range.model';
+import { Subscription } from 'rxjs';
+import { QuestionTypesEnum } from 'src/shared/models/question.model';
 
 @Component({
   selector: 'app-q-range',
@@ -23,28 +25,41 @@ import {MatSliderModule} from '@angular/material/slider';
 })
 export class QRangeComponent {
 
-  public sub: SubQuestionModel = new SubQuestionModel();
-
-
+  @Input() id = '';
+  @Output() valueChanged = new EventEmitter<QRangeFormModel>();
   form!: FormGroup;
+  subscription!: Subscription;
 
-  constructor(private fb: FormBuilder) {
 
-  }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.subscription = this.form.valueChanges.subscribe(value => {
+      this.onValueChanged(value as QRangeFormModel);
+    });
   }
 
   initForm() {
     this.form = this.fb.group({
+      id: new FormControl(this.id),
+      type: new FormControl(QuestionTypesEnum.range),
       key: new FormControl(null),
       isRequired: new FormControl(null),
       max: new FormControl(null),
       min: new FormControl(null),
-      regex: new FormControl(null),
     });
 
+  }
+
+  // ? emits new value to parent component
+  onValueChanged(value: QRangeFormModel) {
+    this.valueChanged.emit(value);
+  }
+
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { IQuestionState } from "./models";
+import { IQuestionState } from "./question.state.model";
 
 // ? question module feature selector
 const getQuestionFeatureState = createFeatureSelector<IQuestionState>('questions');

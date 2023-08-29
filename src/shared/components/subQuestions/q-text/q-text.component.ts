@@ -31,8 +31,6 @@ export class QTextComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    console.log('wowowowowowow');
-    
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
       this.onValueChanged(value as QTextFormModel);
