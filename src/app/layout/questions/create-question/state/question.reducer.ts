@@ -13,8 +13,10 @@ export const questionReducer = createReducer(initialState,
     on(
         QuestionActions.AddSubQuestion,
         (state, action): IQuestionState => {
+            
             const newList = [...state.formBasedQuestions];
             newList.push(action.formValue);
+
             return {
                 ...state,
                 formBasedQuestions: newList
@@ -25,10 +27,7 @@ export const questionReducer = createReducer(initialState,
     // ? update a sub question
     on(
         QuestionActions.UpdateSubQuestion,
-        (state, action): IQuestionState => {
-            console.log('hi');
-            
-
+        (state, action): IQuestionState => {   
             const updatedList = [...state.formBasedQuestions];
             const el = updatedList.find(e => e.id == action.formValue.id)!;
             const index = updatedList.indexOf(el);

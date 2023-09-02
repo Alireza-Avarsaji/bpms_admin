@@ -8,8 +8,8 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SharedModule } from 'src/shared/shared.module';
 import { Subscription } from 'rxjs';
-import { QSingleSelectFormModel } from './models';
-import { QuestionTypesEnum } from 'src/shared/models/question.model';
+import { QSingleSelectFormModel } from './q-single-select.models';
+import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
 
 
 @Component({
@@ -30,9 +30,9 @@ import { QuestionTypesEnum } from 'src/shared/models/question.model';
 })
 export class QSingleSelectComponent {
 
-  @Input() id = '';
+  @Input() data!: QuestionFormTypes<QSingleSelectFormModel>;
   
-  @Output() valueChanged = new EventEmitter<QSingleSelectFormModel>();
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QSingleSelectFormModel>>();
   
   form!: FormGroup;
   subscription!: Subscription;
@@ -42,20 +42,29 @@ export class QSingleSelectComponent {
   ngOnInit(): void {
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      console.log('by');
-      
-      this.onValueChanged(value as QSingleSelectFormModel);
+      this.onValueChanged(value as QuestionFormTypes<QSingleSelectFormModel>);
     });
   }
 
   initForm() {
+    // this.form = this.fb.group({
+    //   id: new FormControl(this.id),
+    //   type: new FormControl(QuestionTypesEnum.single_select),
+    //   key: new FormControl(null),
+    //   values: new FormControl([]),
+    //   isRequired: new FormControl(null),
+    // });
+
     this.form = this.fb.group({
-      id: new FormControl(this.id),
-      type: new FormControl(QuestionTypesEnum.single_select),
-      key: new FormControl(null),
-      values: new FormControl([]),
-      isRequired: new FormControl(null),
+      id: new FormControl(this.data.id ?? null),
+      type: new FormControl(this.data.type ?? null),
+      key: new FormControl(this.data.key ?? null),
+      values: new FormControl(this.data.values ?? []),
+      validators: this.fb.group({
+        isRequired: new FormControl(this.data.validators?.isRequired ?? null),
+      })
     });
+    
 
   }
 
@@ -75,7 +84,7 @@ export class QSingleSelectComponent {
   }
 
     // ? emits new value to parent component
-    onValueChanged(value: QSingleSelectFormModel) {
+    onValueChanged(value: QuestionFormTypes<QSingleSelectFormModel>) {
       this.valueChanged.emit(value);
     }
   

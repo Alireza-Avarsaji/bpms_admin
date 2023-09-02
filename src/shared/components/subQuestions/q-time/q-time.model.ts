@@ -1,12 +1,11 @@
-import { QuestionTypesEnum } from "src/shared/models/question.model";
+export class QTimeFormModel {
+    isRequired: boolean | null = null; 
+    maxH: number | null = null;
+    maxM: number | null = null;
+    minH: number | null = null;
+    minM: number | null = null;
 
-export interface QTimeFormModel {
-    id: string;
-    type: QuestionTypesEnum;
-    key: string;
-    isRequired: boolean;
-    maxH: number;
-    maxM: number;
-    minH: number;
-    minM: number;
+    constructor(init: Partial<QTimeFormModel>) {
+        Object.assign(this, init);
+    }
 }

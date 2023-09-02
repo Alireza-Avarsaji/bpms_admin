@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Hours, Minutes } from 'src/shared/constants/time';
-import { SubQuestionModel } from 'src/shared/models/question.model';
 import { SharedModule } from 'src/shared/shared.module';
+import { QTimeFormModel } from './q-time.model';
+import { Subscription } from 'rxjs';
+import { QuestionTypesEnum } from 'src/shared/models/question.model';
+import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
 
 @Component({
   selector: 'app-q-time',
@@ -26,41 +27,48 @@ import { SharedModule } from 'src/shared/shared.module';
 })
 export class QTimeComponent {
 
-  public sub: SubQuestionModel = new SubQuestionModel();
 
+  @Input() data!: QuestionFormTypes<QTimeFormModel>;
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QTimeFormModel>>();
   form!: FormGroup;
+  subscription!: Subscription;
   hours = Hours;
   minutes = Minutes;
 
-  constructor(private fb: FormBuilder) {
-
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.subscription = this.form.valueChanges.subscribe(value => {
+      this.onValueChanged(value as QuestionFormTypes<QTimeFormModel>);
+    });
   }
 
   initForm() {
     this.form = this.fb.group({
-      key: new FormControl(null),
-      isRequired: new FormControl(null),
-      maxH: new FormControl(null),
-      maxM: new FormControl(null),
-      minH: new FormControl(null),
-      minM: new FormControl(null),
+      id: new FormControl(this.data.id ?? null),
+      type: new FormControl(this.data.type ?? null),
+      key: new FormControl(this.data.key ?? null),
+      validators: this.fb.group({
+        isRequired: new FormControl(null),
+        maxH: new FormControl(null),
+        maxM: new FormControl(null),
+        minH: new FormControl(null),
+        minM: new FormControl(null),
+      })
     });
 
   }
 
-  removeValue(index: number) {
-    this.sub.values.splice(index, 1);
-
+  // ? emits new value to parent component
+  onValueChanged(value: QuestionFormTypes<QTimeFormModel>) {
+    this.valueChanged.emit(value);
   }
 
-  addValue(event: MatChipInputEvent) {
-    const value = (event.value || '').trim();
-    this.sub.values.push(value);
-    event.chipInput!.clear();
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
+
 
 }

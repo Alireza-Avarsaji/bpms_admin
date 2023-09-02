@@ -15,7 +15,7 @@
         <label class="neutral_variant__shade-10 mb-3">گزینه ها</label>
 
         <mat-form-field appearance="outline" class="col-8 col-sm-12 p-0">
-            <mat-chip-grid #chipList aria-label="پرسنل">
+            <mat-chip-grid #chipList formControlName="values">
                 <mat-chip-row *ngFor=" let value of form.controls['values'].value; let i = index" [removable]="true"
                     (removed)="removeValue(i)">
                     {{value}}
@@ -28,13 +28,13 @@
         </mat-form-field>
 
     </div>
-
     <label class="col-12 neutral_variant__shade-10 mb-3">تنظیمات</label>
-    <div class="col-12 d-flex flex-wrap justify-content-between align-content-center align-items-center">
+    <div formGroupName="validators" class="col-12 d-flex flex-wrap justify-content-between align-content-center align-items-center">
         <mat-form-field appearance="outline">
             <input formControlName="max" matInput placeholder="بیشترین تعداد پاسخ" type="text">
         </mat-form-field>
         <mat-slide-toggle formControlName="isRequired">الزامی</mat-slide-toggle>
     </div>
+
 
 </form>

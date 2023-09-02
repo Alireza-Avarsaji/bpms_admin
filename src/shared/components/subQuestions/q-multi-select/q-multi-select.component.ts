@@ -6,10 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { QuestionTypesEnum, SubQuestionModel } from 'src/shared/models/question.model';
 import { SharedModule } from 'src/shared/shared.module';
 import { QMultiSelectFormModel } from './q-multi-select.model';
 import { Subscription } from 'rxjs';
+import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
 
 @Component({
   selector: 'app-q-multi-select',
@@ -29,10 +29,8 @@ import { Subscription } from 'rxjs';
 })
 export class QMultiSelectComponent {
 
-
-  @Input() id = '';
-
-  @Output() valueChanged = new EventEmitter<QMultiSelectFormModel>();
+  @Input() data!: QuestionFormTypes<QMultiSelectFormModel>;
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QMultiSelectFormModel>>();
 
 
   form!: FormGroup;
@@ -44,18 +42,21 @@ export class QMultiSelectComponent {
   ngOnInit(): void {
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      this.onValueChanged(value as QMultiSelectFormModel);
+      this.onValueChanged(value as QuestionFormTypes<QMultiSelectFormModel>);
     });
   }
 
   initForm() {
+    
     this.form = this.fb.group({
-      id: new FormControl(this.id),
-      type: new FormControl(QuestionTypesEnum.multi_select),
-      key: new FormControl(null),
-      values: new FormControl([]),
-      isRequired: new FormControl(null),
-      max: new FormControl(null),
+      id: new FormControl(this.data.id ?? null),
+      type: new FormControl(this.data.type ?? null),
+      key: new FormControl(this.data.key ?? null),
+      values: new FormControl(this.data.values ?? []),
+      validators: this.fb.group({
+        isRequired: new FormControl(this.data.validators?.isRequired ?? null),
+        max: new FormControl(this.data.validators?.max ?? null),
+      })
     });
 
   }
@@ -75,7 +76,7 @@ export class QMultiSelectComponent {
   }
 
   // ? emits new value to parent component
-  onValueChanged(value: QMultiSelectFormModel) {
+  onValueChanged(value: QuestionFormTypes<QMultiSelectFormModel>) {
     this.valueChanged.emit(value);
   }
 

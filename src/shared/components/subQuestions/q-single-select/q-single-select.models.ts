@@ -1,19 +1,17 @@
 import { QuestionTypesEnum } from "src/shared/models/question.model";
 
-// export interface QMultiSelectFormModel {
+// export interface QSingleSelectFormModel {
 //     id: string;
 //     type: QuestionTypesEnum;
 //     key: string;
-//     isRequired: boolean;
 //     values: string[];
-//     max: number;
+//     isRequired: boolean;
 // }
 
-export class QMultiSelectFormModel {
+export class QSingleSelectFormModel {
     isRequired: boolean | null = null;
-    max: number | null = null;
 
-    constructor(init: Partial<QMultiSelectFormModel>) {
+    constructor(init: Partial<QSingleSelectFormModel>) {
         Object.assign(this, init);
     }
 }

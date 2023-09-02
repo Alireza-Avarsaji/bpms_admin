@@ -5,7 +5,6 @@ import { INameValue, QuestionModel, QuestionTypesEnum } from 'src/shared/models/
 import { QuestionFormTypes, State } from './state/question.state.model';
 import * as QuestionActions from './state/questions.actions';
 import { v4 as uuidv4 } from 'uuid';
-import { QTextFormModel } from 'src/shared/components/subQuestions/q-text/models';
 import { Observable } from 'rxjs';
 import { getFormBasedQuestions } from './state/question.selectors';
 
@@ -19,7 +18,7 @@ export class CreateQuestionComponent implements OnInit {
   question!: QuestionModel;
   QuestionMenuItems: INameValue[] = QuestionTypeList;
   questionTypeEnum = QuestionTypesEnum;
-  subQuestions$!: Observable<QuestionFormTypes[]>;
+  subQuestions$!: Observable<QuestionFormTypes<any>[]>;
 
 
   constructor(private store: Store<State>) { }
@@ -32,17 +31,17 @@ export class CreateQuestionComponent implements OnInit {
   public addSubQuestion(qType: INameValue) {
     const id = uuidv4();
     this.store.dispatch(
-      QuestionActions.AddSubQuestion({ formValue: ({ id: id, type: qType.value }) as QTextFormModel })
+      QuestionActions.AddSubQuestion({ formValue: { id: id, type: qType.value, key: '' } })
     );
   }
 
-  trackById(index: number, item: QuestionFormTypes) {
+  trackById(index: number, item: QuestionFormTypes<any>) {
     return item.id;
   }
 
 
   // ? whenEver a subQuestion value is changed
-  onSubValueChanged(value: QuestionFormTypes) { 
+  onSubValueChanged(value: QuestionFormTypes<any>) { 
     this.store.dispatch(
       QuestionActions.UpdateSubQuestion(
         {

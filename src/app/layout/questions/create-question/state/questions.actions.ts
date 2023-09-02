@@ -3,10 +3,10 @@ import { QuestionFormTypes } from "./question.state.model";
 
 export const AddSubQuestion = createAction(
     '[Question] AddSubQuestion',
-    props<{ formValue: QuestionFormTypes }>()
+    props<{ formValue: QuestionFormTypes<any> }>()
 );
 
 export const UpdateSubQuestion = createAction(
     '[Question] UpdateSubQuestion',
-    props<{ formValue: QuestionFormTypes }>()
+    props<{ formValue: QuestionFormTypes<any> }>()
 );

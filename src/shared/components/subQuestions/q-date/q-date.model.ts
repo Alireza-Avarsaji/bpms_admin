@@ -1,10 +1,9 @@
-import { QuestionTypesEnum } from "src/shared/models/question.model";
+export class QDateFormModel {
+    isRequired: boolean | null = null; 
+    max: number | null = null;
+    min: number | null = null;
 
-export interface QDateFormModel {
-    id: string;
-    type: QuestionTypesEnum;
-    key: string;
-    isRequired: boolean;
-    max: number;
-    min: number;
+    constructor(init: Partial<QDateFormModel>) {
+        Object.assign(this, init);
+    }
 }
