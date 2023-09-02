@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/shared/shared.module';
-import { QRadioFormModel } from './q-radio.model';
+import { QRadioValidationModel } from './q-radio.model';
 import { Subscription } from 'rxjs';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
 
@@ -29,8 +29,8 @@ import { QuestionFormTypes } from 'src/app/layout/questions/create-question/stat
 })
 export class QRadioComponent {
 
-  @Input() data!: QuestionFormTypes<QRadioFormModel>;
-  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QRadioFormModel>>();
+  @Input() data!: QuestionFormTypes<QRadioValidationModel>;
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QRadioValidationModel>>();
   form!: FormGroup;
   subscription!: Subscription;
 
@@ -39,7 +39,7 @@ export class QRadioComponent {
   ngOnInit(): void {
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      this.onValueChanged(value as QuestionFormTypes<QRadioFormModel>);
+      this.onValueChanged(value as QuestionFormTypes<QRadioValidationModel>);
     });
   }
 
@@ -48,14 +48,14 @@ export class QRadioComponent {
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
-      validators: this.fb.group({
-        isRequired: new FormControl(this.data.validators?.isRequired ?? null),
+      validations: this.fb.group({
+        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
       })
     });
   }
 
   // ? emits new value to parent component
-  onValueChanged(value: QuestionFormTypes<QRadioFormModel>) {
+  onValueChanged(value: QuestionFormTypes<QRadioValidationModel>) {
     this.valueChanged.emit(value);
   }
 

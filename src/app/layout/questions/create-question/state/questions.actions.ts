@@ -10,3 +10,7 @@ export const UpdateSubQuestion = createAction(
     '[Question] UpdateSubQuestion',
     props<{ formValue: QuestionFormTypes<any> }>()
 );
+
+export const SubmitQuestion = createAction(
+    '[Question] SubmitQuestion'
+);

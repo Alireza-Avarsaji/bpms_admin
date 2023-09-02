@@ -41,11 +41,11 @@ export class QTextComponent implements OnInit, OnDestroy {
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
-      validators: this.fb.group({
-        isRequired: new FormControl(this.data.validators?.isRequired ?? null),
-        max: new FormControl(this.data.validators?.max ?? null),
-        min: new FormControl(this.data.validators?.min ?? null),
-        regex: new FormControl(this.data.validators?.regex ?? null),
+      validations: this.fb.group({
+        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        max: new FormControl(this.data.validations?.max ?? null),
+        min: new FormControl(this.data.validations?.min ?? null),
+        regex: new FormControl(this.data.validations?.regex ?? null),
       })
     });
   }

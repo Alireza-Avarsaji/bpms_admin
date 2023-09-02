@@ -1,19 +1,18 @@
-import { QuestionTypesEnum } from "src/shared/models/question.model";
+import { ValidationModel, ValidationTypeEnum } from "src/shared/models/question.model";
 
-// export interface QMultiSelectFormModel {
-//     id: string;
-//     type: QuestionTypesEnum;
-//     key: string;
-//     isRequired: boolean;
-//     values: string[];
-//     max: number;
-// }
-
-export class QMultiSelectFormModel {
+export class QMultiSelectValidationModel {
     isRequired: boolean | null = null;
     max: number | null = null;
 
-    constructor(init: Partial<QMultiSelectFormModel>) {
+    constructor(init: Partial<QMultiSelectValidationModel>) {
         Object.assign(this, init);
     }
+}
+
+// ? convert formbased validation model to dto
+export const getMultiSelectValidationDto = (validations: QMultiSelectValidationModel) => {
+    return [
+        new ValidationModel(ValidationTypeEnum.isRequired, String(validations.isRequired)),
+        new ValidationModel(ValidationTypeEnum.max, String(validations.max))
+    ];
 }

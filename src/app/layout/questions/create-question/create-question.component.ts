@@ -41,7 +41,7 @@ export class CreateQuestionComponent implements OnInit {
 
 
   // ? whenEver a subQuestion value is changed
-  onSubValueChanged(value: QuestionFormTypes<any>) { 
+  onSubValueChanged(value: QuestionFormTypes<any>) {
     this.store.dispatch(
       QuestionActions.UpdateSubQuestion(
         {
@@ -53,5 +53,8 @@ export class CreateQuestionComponent implements OnInit {
 
   public removeQuestion() { }
 
-  public submitQuestion() { }
+  public submitQuestion() {
+    this.store.dispatch(QuestionActions.SubmitQuestion());
+    ;
+  }
 }

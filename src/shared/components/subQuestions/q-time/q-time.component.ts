@@ -6,7 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Hours, Minutes } from 'src/shared/constants/time';
 import { SharedModule } from 'src/shared/shared.module';
-import { QTimeFormModel } from './q-time.model';
+import { QTimeValidationModel } from './q-time.model';
 import { Subscription } from 'rxjs';
 import { QuestionTypesEnum } from 'src/shared/models/question.model';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
@@ -28,8 +28,8 @@ import { QuestionFormTypes } from 'src/app/layout/questions/create-question/stat
 export class QTimeComponent {
 
 
-  @Input() data!: QuestionFormTypes<QTimeFormModel>;
-  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QTimeFormModel>>();
+  @Input() data!: QuestionFormTypes<QTimeValidationModel>;
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QTimeValidationModel>>();
   form!: FormGroup;
   subscription!: Subscription;
   hours = Hours;
@@ -40,7 +40,7 @@ export class QTimeComponent {
   ngOnInit(): void {
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      this.onValueChanged(value as QuestionFormTypes<QTimeFormModel>);
+      this.onValueChanged(value as QuestionFormTypes<QTimeValidationModel>);
     });
   }
 
@@ -49,7 +49,7 @@ export class QTimeComponent {
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
-      validators: this.fb.group({
+      validations: this.fb.group({
         isRequired: new FormControl(null),
         maxH: new FormControl(null),
         maxM: new FormControl(null),
@@ -61,7 +61,7 @@ export class QTimeComponent {
   }
 
   // ? emits new value to parent component
-  onValueChanged(value: QuestionFormTypes<QTimeFormModel>) {
+  onValueChanged(value: QuestionFormTypes<QTimeValidationModel>) {
     this.valueChanged.emit(value);
   }
 

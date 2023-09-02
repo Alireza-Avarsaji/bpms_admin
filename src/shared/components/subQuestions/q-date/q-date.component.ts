@@ -7,7 +7,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Subscription } from 'rxjs';
-import { QDateFormModel } from './q-date.model';
+import { QDateValidationModel } from './q-date.model';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
 
 @Component({
@@ -28,8 +28,8 @@ import { QuestionFormTypes } from 'src/app/layout/questions/create-question/stat
 export class QDateComponent {
 
 
-  @Input() data!: QuestionFormTypes<QDateFormModel>;
-  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QDateFormModel>>();
+  @Input() data!: QuestionFormTypes<QDateValidationModel>;
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QDateValidationModel>>();
   form!: FormGroup;
   subscription!: Subscription;
 
@@ -38,7 +38,7 @@ export class QDateComponent {
   ngOnInit(): void {
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      this.onValueChanged(value as QuestionFormTypes<QDateFormModel>);
+      this.onValueChanged(value as QuestionFormTypes<QDateValidationModel>);
     });
   }
 
@@ -48,16 +48,16 @@ export class QDateComponent {
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
-      validators: this.fb.group({
-        isRequired: new FormControl(this.data.validators?.isRequired ?? null),
-        max: new FormControl(this.data.validators?.max ?? null),
-        min: new FormControl(this.data.validators?.min ?? null),
+      validations: this.fb.group({
+        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        max: new FormControl(this.data.validations?.max ?? null),
+        min: new FormControl(this.data.validations?.min ?? null),
       })
     });
   }
 
     // ? emits new value to parent component
-    onValueChanged(value: QuestionFormTypes<QDateFormModel>) {
+    onValueChanged(value: QuestionFormTypes<QDateValidationModel>) {
       this.valueChanged.emit(value);
     }
   

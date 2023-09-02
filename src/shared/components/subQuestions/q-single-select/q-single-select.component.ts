@@ -8,7 +8,7 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SharedModule } from 'src/shared/shared.module';
 import { Subscription } from 'rxjs';
-import { QSingleSelectFormModel } from './q-single-select.models';
+import { QSingleSelectValidationModel } from './q-single-select.models';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
 
 
@@ -30,9 +30,9 @@ import { QuestionFormTypes } from 'src/app/layout/questions/create-question/stat
 })
 export class QSingleSelectComponent {
 
-  @Input() data!: QuestionFormTypes<QSingleSelectFormModel>;
+  @Input() data!: QuestionFormTypes<QSingleSelectValidationModel>;
   
-  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QSingleSelectFormModel>>();
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QSingleSelectValidationModel>>();
   
   form!: FormGroup;
   subscription!: Subscription;
@@ -42,7 +42,7 @@ export class QSingleSelectComponent {
   ngOnInit(): void {
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      this.onValueChanged(value as QuestionFormTypes<QSingleSelectFormModel>);
+      this.onValueChanged(value as QuestionFormTypes<QSingleSelectValidationModel>);
     });
   }
 
@@ -60,8 +60,8 @@ export class QSingleSelectComponent {
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
       values: new FormControl(this.data.values ?? []),
-      validators: this.fb.group({
-        isRequired: new FormControl(this.data.validators?.isRequired ?? null),
+      validations: this.fb.group({
+        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
       })
     });
     
@@ -84,7 +84,7 @@ export class QSingleSelectComponent {
   }
 
     // ? emits new value to parent component
-    onValueChanged(value: QuestionFormTypes<QSingleSelectFormModel>) {
+    onValueChanged(value: QuestionFormTypes<QSingleSelectValidationModel>) {
       this.valueChanged.emit(value);
     }
   

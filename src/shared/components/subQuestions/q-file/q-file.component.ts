@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FileFormats } from 'src/shared/constants/fileFormat';
 import { SharedModule } from 'src/shared/shared.module';
-import { QFileFormModel } from './q-file.model';
+import { QFileValidationModel } from './q-file.model';
 import { Subscription } from 'rxjs';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
 
@@ -31,8 +31,8 @@ import { QuestionFormTypes } from 'src/app/layout/questions/create-question/stat
 export class QFileComponent {
 
 
-  @Input() data!: QuestionFormTypes<QFileFormModel>;
-  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QFileFormModel>>();
+  @Input() data!: QuestionFormTypes<QFileValidationModel>;
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QFileValidationModel>>();
   form!: FormGroup;
   subscription!: Subscription;
   fileFormats = FileFormats;
@@ -43,7 +43,7 @@ export class QFileComponent {
   ngOnInit(): void {
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      this.onValueChanged(value as QuestionFormTypes<QFileFormModel>);
+      this.onValueChanged(value as QuestionFormTypes<QFileValidationModel>);
     });
   }
 
@@ -54,10 +54,10 @@ export class QFileComponent {
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
-      validators: this.fb.group({
-        isRequired: new FormControl(this.data.validators?.isRequired ?? null),
-        maxSize: new FormControl(this.data.validators?.maxSize ?? null),
-        extension: new FormControl(this.data.validators?.extension ?? null),
+      validations: this.fb.group({
+        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        maxSize: new FormControl(this.data.validations?.maxSize ?? null),
+        extension: new FormControl(this.data.validations?.extension ?? null),
       })
     });
 
@@ -65,7 +65,7 @@ export class QFileComponent {
 
 
     // ? emits new value to parent component
-    onValueChanged(value: QuestionFormTypes<QFileFormModel>) {
+    onValueChanged(value: QuestionFormTypes<QFileValidationModel>) {
       this.valueChanged.emit(value);
     }
   

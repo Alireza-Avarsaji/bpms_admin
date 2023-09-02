@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/shared/shared.module';
-import { QMultiSelectFormModel } from './q-multi-select.model';
+import { QMultiSelectValidationModel } from './q-multi-select.model';
 import { Subscription } from 'rxjs';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
 
@@ -29,8 +29,8 @@ import { QuestionFormTypes } from 'src/app/layout/questions/create-question/stat
 })
 export class QMultiSelectComponent {
 
-  @Input() data!: QuestionFormTypes<QMultiSelectFormModel>;
-  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QMultiSelectFormModel>>();
+  @Input() data!: QuestionFormTypes<QMultiSelectValidationModel>;
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QMultiSelectValidationModel>>();
 
 
   form!: FormGroup;
@@ -42,7 +42,7 @@ export class QMultiSelectComponent {
   ngOnInit(): void {
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      this.onValueChanged(value as QuestionFormTypes<QMultiSelectFormModel>);
+      this.onValueChanged(value as QuestionFormTypes<QMultiSelectValidationModel>);
     });
   }
 
@@ -53,9 +53,9 @@ export class QMultiSelectComponent {
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
       values: new FormControl(this.data.values ?? []),
-      validators: this.fb.group({
-        isRequired: new FormControl(this.data.validators?.isRequired ?? null),
-        max: new FormControl(this.data.validators?.max ?? null),
+      validations: this.fb.group({
+        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        max: new FormControl(this.data.validations?.max ?? null),
       })
     });
 
@@ -76,7 +76,7 @@ export class QMultiSelectComponent {
   }
 
   // ? emits new value to parent component
-  onValueChanged(value: QuestionFormTypes<QMultiSelectFormModel>) {
+  onValueChanged(value: QuestionFormTypes<QMultiSelectValidationModel>) {
     this.valueChanged.emit(value);
   }
 

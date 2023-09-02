@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedModule } from 'src/shared/shared.module';
 import { MatSliderModule } from '@angular/material/slider';
-import { QRangeFormModel } from './q-range.model';
+import { QRangeValidationModel } from './q-range.model';
 import { Subscription } from 'rxjs';
 import { QuestionTypesEnum } from 'src/shared/models/question.model';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
@@ -26,8 +26,8 @@ import { QuestionFormTypes } from 'src/app/layout/questions/create-question/stat
 })
 export class QRangeComponent {
 
-  @Input() data!: QuestionFormTypes<QRangeFormModel>;
-  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QRangeFormModel>>();
+  @Input() data!: QuestionFormTypes<QRangeValidationModel>;
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QRangeValidationModel>>();
   form!: FormGroup;
   subscription!: Subscription;
 
@@ -37,7 +37,7 @@ export class QRangeComponent {
   ngOnInit(): void {
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      this.onValueChanged(value as QuestionFormTypes<QRangeFormModel>);
+      this.onValueChanged(value as QuestionFormTypes<QRangeValidationModel>);
     });
   }
 
@@ -46,17 +46,17 @@ export class QRangeComponent {
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
-      validators: this.fb.group({
-        isRequired: new FormControl(this.data.validators?.isRequired ?? null),
-        max: new FormControl(this.data.validators?.max ?? null),
-        min: new FormControl(this.data.validators?.min ?? null),
+      validations: this.fb.group({
+        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        max: new FormControl(this.data.validations?.max ?? null),
+        min: new FormControl(this.data.validations?.min ?? null),
       })
     });
 
   }
 
   // ? emits new value to parent component
-  onValueChanged(value: QuestionFormTypes<QRangeFormModel>) {
+  onValueChanged(value: QuestionFormTypes<QRangeValidationModel>) {
     this.valueChanged.emit(value);
   }
 
