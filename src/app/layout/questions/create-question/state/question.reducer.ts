@@ -64,9 +64,6 @@ export const questionReducer = createReducer(initialState,
     on(
         QuestionActions.UpdateQuestionTitle,
         (state, action): IQuestionState => {
-            console.log('yoyoyoyo');
-            
-
             return {
                 ...state,
                 title: action.title

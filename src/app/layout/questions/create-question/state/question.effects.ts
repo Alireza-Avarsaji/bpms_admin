@@ -42,7 +42,7 @@ export class QuestionEffects {
         () => {
             return this.actions$.pipe(
                 ofType(QuestionActions.loadQuestion),
-                switchMap(action => this.questionService.getQuestion(action.id)),
+                switchMap(action => this.questionService.getQuestionById(action.id)),
                 map(res => {
                     this.store.dispatch(QuestionActions.UpdateQuestionTitle({title: res.result.title}));
                     for (const sub of res.result.subQuestions) {

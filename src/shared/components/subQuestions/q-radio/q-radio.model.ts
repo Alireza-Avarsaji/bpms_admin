@@ -11,5 +11,5 @@ export class QRadioValidationModel {
 export const getRadioValidationDto = (validations: QRadioValidationModel) => {
     return [
         new ValidationModel(ValidationTypeEnum.isRequired, String(validations.isRequired))
-    ];
+    ].filter(v => v.value);
 }

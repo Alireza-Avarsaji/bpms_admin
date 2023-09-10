@@ -20,5 +20,5 @@ export const getTimeValidationDto = (validations: QTimeValidationModel) => {
         new ValidationModel(ValidationTypeEnum.maxM, String(validations.maxM)),
         new ValidationModel(ValidationTypeEnum.minH, String(validations.minH)),
         new ValidationModel(ValidationTypeEnum.minM, String(validations.minM)),
-    ];
+    ].filter(v => v.value);
 }

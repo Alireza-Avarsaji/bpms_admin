@@ -65,7 +65,7 @@ export class CreateQuestionComponent implements OnInit {
   public addSubQuestion(qType: INameValue) {
     const id = uuidv4();
     this.store.dispatch(
-      QuestionActions.AddSubQuestion({ formValue: { id: id, type: qType.value, key: '' } })
+      QuestionActions.AddSubQuestion({ formValue: { id: id, type: qType.value, key: '', isValid: false } })
     );
   }
 

@@ -12,5 +12,5 @@ export class QSingleSelectValidationModel {
 export const getSingleSelectValidationDto = (validations: QSingleSelectValidationModel) => {
     return [
         new ValidationModel(ValidationTypeEnum.isRequired, String(validations.isRequired))
-    ];
+    ].filter(v => v.value);
 }

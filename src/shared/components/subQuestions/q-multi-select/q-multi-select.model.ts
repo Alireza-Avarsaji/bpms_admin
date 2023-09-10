@@ -13,6 +13,6 @@ export class QMultiSelectValidationModel {
 export const getMultiSelectValidationDto = (validations: QMultiSelectValidationModel) => {
     return [
         new ValidationModel(ValidationTypeEnum.isRequired, String(validations.isRequired)),
-        new ValidationModel(ValidationTypeEnum.max, String(validations.max))
-    ];
+        new ValidationModel(ValidationTypeEnum.max, validations.max?.toString()!)
+    ].filter(v => v.value);
 }

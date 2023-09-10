@@ -1,8 +1,9 @@
 <form [formGroup]="form" class="col-12 d-flex flex-wrap justify-content-between align-content-start">
 
-    <mat-form-field class="col-12"  appearance="outline">
+    <mat-form-field class="col-12 mb-3"  appearance="outline">
         <mat-label>عنوان</mat-label>
         <input formControlName="key" matInput placeholder="عنوان" autofocus type="text">
+        <mat-error>وارد کردن عنوان الزامی است</mat-error>
     </mat-form-field>
 
     <mat-form-field class="col-12 mb-4" appearance="fill">

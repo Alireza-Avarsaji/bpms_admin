@@ -7,6 +7,7 @@ export class QuestionFormTypes<T> {
     key: string = '';
     values?: string[];
     validations?: T;
+    isValid: boolean = false;
 
     constructor(id?: string, type?: QuestionTypesEnum, key?: string, values?: string[], validations?: T) {
         this.id = id!;

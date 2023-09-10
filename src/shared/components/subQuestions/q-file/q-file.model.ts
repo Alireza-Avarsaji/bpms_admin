@@ -14,8 +14,8 @@ export class QFileValidationModel {
 // ? convert formbased validation model to dto
 export const getFileValidationDto = (validations: QFileValidationModel) => {
     return [
-        new ValidationModel(ValidationTypeEnum.isRequired, String(validations.isRequired)),
-        new ValidationModel(ValidationTypeEnum.max, String(validations.maxSize)),
-        new ValidationModel(ValidationTypeEnum.extension, String(validations.extension))
-    ];
+        new ValidationModel(ValidationTypeEnum.isRequired, validations.isRequired?.toString()!),
+        new ValidationModel(ValidationTypeEnum.max, validations.maxSize?.toString()!),
+        new ValidationModel(ValidationTypeEnum.extension, validations.extension?.toString()!)
+    ].filter(v => v.value);
 }

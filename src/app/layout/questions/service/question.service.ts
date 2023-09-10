@@ -9,7 +9,7 @@ import { TSResult } from 'src/shared/models/result-model/TServiceResult';
 })
 export class QuestionService {
 
-  apiUrl = 'https://192.168.98.12:5001/Question'
+  apiUrl = 'https://192.168.98.12:5001/Question';
 
   constructor(private httpclient: HttpClient) { }
 
@@ -17,7 +17,9 @@ export class QuestionService {
     return this.httpclient.post<TSResult<string>>(`${this.apiUrl}/CreateQuestion`, body);
   }
 
-  getQuestion(id: string): Observable<TSResult<QuestionModel>> {
+  getQuestionById(id: string): Observable<TSResult<QuestionModel>> {
     return this.httpclient.get<TSResult<QuestionModel>>(`${this.apiUrl}/GetQuestion/${id}`);
   }
+
+
 }

@@ -14,7 +14,7 @@ export class QRangeValidationModel {
 export const getRangeValidationDto = (validations: QRangeValidationModel) => {
     return [
         new ValidationModel(ValidationTypeEnum.isRequired, String(validations.isRequired)),
-        new ValidationModel(ValidationTypeEnum.max, String(validations.max)),
-        new ValidationModel(ValidationTypeEnum.min, String(validations.min)),
-    ];
+        new ValidationModel(ValidationTypeEnum.max, validations.max?.toString()!),
+        new ValidationModel(ValidationTypeEnum.min, validations.min?.toString()!),
+    ].filter(v => v.value);
 }
