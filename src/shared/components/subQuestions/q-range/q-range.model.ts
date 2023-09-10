@@ -1,7 +1,7 @@
 import { ValidationModel, ValidationTypeEnum } from "src/shared/models/question.model";
 
 export class QRangeValidationModel {
-    isRequired: boolean | null = null; 
+    isRequired: string | null = null; 
     max: number | null = null;
     min: number | null = null;
 
@@ -15,6 +15,6 @@ export const getRangeValidationDto = (validations: QRangeValidationModel) => {
     return [
         new ValidationModel(ValidationTypeEnum.isRequired, String(validations.isRequired)),
         new ValidationModel(ValidationTypeEnum.max, String(validations.max)),
-        new ValidationModel(ValidationTypeEnum.max, String(validations.min)),
+        new ValidationModel(ValidationTypeEnum.min, String(validations.min)),
     ];
 }

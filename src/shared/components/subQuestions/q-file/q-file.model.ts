@@ -1,7 +1,7 @@
 import { ValidationModel, ValidationTypeEnum } from "src/shared/models/question.model";
 
 export class QFileValidationModel {
-    isRequired: boolean | null = null; 
+    isRequired: string | null = null; 
     maxSize: number | null = null;
     extension: string | null = null;
 

@@ -11,6 +11,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { QFileValidationModel } from './q-file.model';
 import { Subscription } from 'rxjs';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
+import { CheckTruthyPipe } from 'src/shared/pipes/check-truthy.pipe';
 
 @Component({
   selector: 'app-q-file',
@@ -38,7 +39,7 @@ export class QFileComponent {
   fileFormats = FileFormats;
 
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private checkTruthyPipe: CheckTruthyPipe) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -55,7 +56,7 @@ export class QFileComponent {
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
       validations: this.fb.group({
-        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
         maxSize: new FormControl(this.data.validations?.maxSize ?? null),
         extension: new FormControl(this.data.validations?.extension ?? null),
       })

@@ -5,6 +5,7 @@ import { QuestionModel, SubQuestionModel } from "src/shared/models/question.mode
 import { formValidationToDtoAdaptor } from "../adaptors/validations.adaptor";
 
 const initialState: IQuestionState = {
+    title: '',
     formBasedQuestions: []
 }
 
@@ -26,6 +27,22 @@ export const questionReducer = createReducer(initialState,
         }
     ),
 
+    // ? remove a sub question
+    on(
+        QuestionActions.RemoveSubQuestion,
+        (state, action): IQuestionState => {
+
+            const id = action.id;
+            const stateCopy = [...state.formBasedQuestions];
+            const newState = stateCopy.filter(i => i.id != id);
+
+            return {
+                ...state,
+                formBasedQuestions: newState
+            }
+        }
+    ),
+
     // ? update a sub question
     on(
         QuestionActions.UpdateSubQuestion,
@@ -43,24 +60,72 @@ export const questionReducer = createReducer(initialState,
         }
     ),
 
-    // ? submit question 
+    // ? update a sub question
     on(
-        QuestionActions.SubmitQuestion,
+        QuestionActions.UpdateQuestionTitle,
         (state, action): IQuestionState => {
+            console.log('yoyoyoyo');
+            
 
-            const dto = new QuestionModel();
+            return {
+                ...state,
+                title: action.title
+            }
+        }
+    ),
 
-            for (const sub of state.formBasedQuestions) {
-                const item = new SubQuestionModel(sub);
-                item.validations = formValidationToDtoAdaptor(sub.type ,sub.validations);
-                dto.options.push(item);
-            }            
-
+    // ? post question(has effect)
+    on(
+        QuestionActions.postQuestion,
+        (state, action): IQuestionState => {
             return {
                 ...state
             }
         }
-    )
+    ),
+
+    // ? post question success
+    on(
+        QuestionActions.postQuestionSuccess,
+        (state, action): IQuestionState => {
+            return {
+                ...state,
+                title: action.title
+            }
+        }
+    ),
+
+    // ? load question (has effect)
+    on(
+        QuestionActions.loadQuestion,
+        (state, action): IQuestionState => {
+            return {
+                ...state,
+            }
+        }
+    ),
+
+    // ? load question success
+    on(
+        QuestionActions.loadQuestionSuccess,
+        (state): IQuestionState => {
+            return {
+                ...state,
+            }
+        }
+    ),
+
+    // ? load question error
+    on(
+        QuestionActions.loadQuestionError,
+        (state): IQuestionState => {
+            return {
+                ...state,
+            }
+        }
+    ),
+
+
 
 );
 

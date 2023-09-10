@@ -3,9 +3,10 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { QTextFormModel } from './q-text.models';
+import { QTextValidationModel } from './q-text.models';
 import { Subscription } from 'rxjs';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
+import { CheckTruthyPipe } from 'src/shared/pipes/check-truthy.pipe';
 
 @Component({
   selector: 'app-q-text',
@@ -21,18 +22,18 @@ import { QuestionFormTypes } from 'src/app/layout/questions/create-question/stat
 })
 export class QTextComponent implements OnInit, OnDestroy {
 
-  @Input() data!: QuestionFormTypes<QTextFormModel>;
-  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QTextFormModel>>();
+  @Input() data!: QuestionFormTypes<QTextValidationModel>;
+  @Output() valueChanged = new EventEmitter<QuestionFormTypes<QTextValidationModel>>();
 
   form!: FormGroup;
   subscription!: Subscription;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private checkTruthyPipe: CheckTruthyPipe) {}
 
   ngOnInit(): void { 
     this.initForm();
     this.subscription = this.form.valueChanges.subscribe(value => {
-      this.onValueChanged(value as QuestionFormTypes<QTextFormModel>);
+      this.onValueChanged(value as QuestionFormTypes<QTextValidationModel>);
     });
   }
 
@@ -42,7 +43,7 @@ export class QTextComponent implements OnInit, OnDestroy {
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
       validations: this.fb.group({
-        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
         max: new FormControl(this.data.validations?.max ?? null),
         min: new FormControl(this.data.validations?.min ?? null),
         regex: new FormControl(this.data.validations?.regex ?? null),
@@ -51,7 +52,7 @@ export class QTextComponent implements OnInit, OnDestroy {
   }
 
   // ? emits new value to parent component
-  onValueChanged(value: QuestionFormTypes<QTextFormModel>) {
+  onValueChanged(value: QuestionFormTypes<QTextValidationModel>) {
     this.valueChanged.emit(value);
   }
 

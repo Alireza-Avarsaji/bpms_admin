@@ -1,7 +1,7 @@
 import { ValidationModel, ValidationTypeEnum } from "src/shared/models/question.model";
 
 export class QRadioValidationModel {
-    isRequired: boolean | null = null; 
+    isRequired: string | null = null; 
     constructor(init: Partial<QRadioValidationModel>) {
         Object.assign(this, init);
     }

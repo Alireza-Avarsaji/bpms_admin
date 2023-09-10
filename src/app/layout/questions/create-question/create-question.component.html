@@ -1,9 +1,12 @@
-<section
-    class="h-100 w-100 d-flex flex-wrap justify-content-center align-content-center p-4 position-relative overflow-auto">
-    <!-- <header class="col-12 d-flex justify-content-between mb-4">
-        <span>ایجاد سوال</span>
-        <mat-icon>close</mat-icon>
-    </header> -->
+<form [formGroup]="form"
+    class="h-100 w-100 d-flex flex-wrap justify-content-center align-content-start p-4 position-relative overflow-auto">
+
+        <mat-form-field class="col-12 col-md-9 col-lg-7 mb-5"  appearance="outline">
+            <mat-label>عنوان سوال</mat-label>
+            <input formControlName="title" matInput  type="text">
+            <mat-error>وارد کردن عنوان الزامی است</mat-error>
+        </mat-form-field>
+
 
     <ng-container *ngIf="subQuestions$ | async as qList">
         <article class="h-100 col-12 col-md-9 col-lg-7 d-flex flex-wrap justify-content-center align-content-start"
@@ -11,7 +14,12 @@
 
             <div *ngFor="let sub of qList; let i = index; trackBy: trackById" [ngSwitch]="sub.type" class="col-12 mb-5">
 
-                <label class="neutral_variant__shade-10 mb-3">زیر سوال شماره {{i + 1}}</label>
+                <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+                    <label class="neutral_variant__shade-10">زیر سوال شماره {{i + 1}}</label>
+                    <button (click)="removeSubQuestion(sub)" class="error__shade-50" mat-icon-button>
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
 
                 <ng-container *ngSwitchCase="questionTypeEnum.text" class="w-100 h-100">
                     <app-q-text [data]="sub" (valueChanged)="onSubValueChanged($event)"></app-q-text>
@@ -42,9 +50,8 @@
             </div>
 
             <div class="col-12 d-flex flex-wrap justify-content-end">
-                <button (click)="submitQuestion()" mat-flat-button class="bg-neutral_variant__shade-10 system_color__white">ثبت</button>
+                <button (click)="submitQuestion()" [disabled]="form.invalid && qList.length > 0" mat-flat-button class="bg-neutral_variant__shade-10 system_color__white">ثبت</button>
             </div>
-
 
         </article>
     </ng-container>
@@ -52,7 +59,7 @@
 
 
     <ng-template #placeholder>
-        <p class="neutral_variant__shade-10">پرسشی موجود نیست</p>
+        <p class="neutral_variant__shade-10 col-12 text-center">پرسشی موجود نیست</p>
     </ng-template>
 
     <button mat-fab class="bg-neutral_variant__shade-10 system_color__white add-btn" [matMenuTriggerFor]="menu">
@@ -71,4 +78,4 @@
 
 
 
-</section>
+</form>

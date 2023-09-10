@@ -10,6 +10,7 @@ import { QTimeValidationModel } from './q-time.model';
 import { Subscription } from 'rxjs';
 import { QuestionTypesEnum } from 'src/shared/models/question.model';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
+import { CheckTruthyPipe } from 'src/shared/pipes/check-truthy.pipe';
 
 @Component({
   selector: 'app-q-time',
@@ -35,7 +36,7 @@ export class QTimeComponent {
   hours = Hours;
   minutes = Minutes;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private checkTruthyPipe: CheckTruthyPipe) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -50,11 +51,11 @@ export class QTimeComponent {
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
       validations: this.fb.group({
-        isRequired: new FormControl(null),
-        maxH: new FormControl(null),
-        maxM: new FormControl(null),
-        minH: new FormControl(null),
-        minM: new FormControl(null),
+        isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
+        maxH: new FormControl(this.data.validations?.maxH ?? null),
+        maxM: new FormControl(this.data.validations?.maxM ?? null),
+        minH: new FormControl(this.data.validations?.minH ?? null),
+        minM: new FormControl(this.data.validations?.minM ?? null),
       })
     });
 

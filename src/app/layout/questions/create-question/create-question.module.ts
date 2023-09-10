@@ -17,12 +17,18 @@ import { QFileComponent } from 'src/shared/components/subQuestions/q-file/q-file
 import { QRadioComponent } from 'src/shared/components/subQuestions/q-radio/q-radio.component';
 import { StoreModule } from '@ngrx/store';
 import { questionReducer } from './state/question.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { QuestionEffects } from './state/question.effects';
 
 
 
 const routes: Routes = [
   {
     path: '',
+    component: CreateQuestionComponent,
+  },
+  {
+    path: ':id',
     component: CreateQuestionComponent,
   }
 ];
@@ -48,6 +54,7 @@ const routes: Routes = [
     QFileComponent,
     QRadioComponent,
     StoreModule.forFeature('questions', questionReducer),
+    EffectsModule.forFeature([QuestionEffects])
   ],
   providers: [],
 })

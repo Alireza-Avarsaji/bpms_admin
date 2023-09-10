@@ -10,6 +10,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { QMultiSelectValidationModel } from './q-multi-select.model';
 import { Subscription } from 'rxjs';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
+import { CheckTruthyPipe } from 'src/shared/pipes/check-truthy.pipe';
 
 @Component({
   selector: 'app-q-multi-select',
@@ -37,7 +38,7 @@ export class QMultiSelectComponent {
   subscription!: Subscription;
 
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private checkTruthyPipe: CheckTruthyPipe) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -54,7 +55,7 @@ export class QMultiSelectComponent {
       key: new FormControl(this.data.key ?? null),
       values: new FormControl(this.data.values ?? []),
       validations: this.fb.group({
-        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
         max: new FormControl(this.data.validations?.max ?? null),
       })
     });

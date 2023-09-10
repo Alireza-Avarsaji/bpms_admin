@@ -1,9 +1,9 @@
 import { ValidationModel, ValidationTypeEnum } from "src/shared/models/question.model";
 
 export class QDateValidationModel {
-    isRequired: boolean | null = null;
-    max: number | null = null;
-    min: number | null = null;
+    isRequired: string | null = null;
+    max: string | null = null;
+    min: string | null = null;
 
     constructor(init: QDateValidationModel) {
         Object.assign(this, init);

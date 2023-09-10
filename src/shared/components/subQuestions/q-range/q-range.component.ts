@@ -9,6 +9,7 @@ import { QRangeValidationModel } from './q-range.model';
 import { Subscription } from 'rxjs';
 import { QuestionTypesEnum } from 'src/shared/models/question.model';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
+import { CheckTruthyPipe } from 'src/shared/pipes/check-truthy.pipe';
 
 @Component({
   selector: 'app-q-range',
@@ -32,7 +33,7 @@ export class QRangeComponent {
   subscription!: Subscription;
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private checkTruthyPipe: CheckTruthyPipe) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -47,7 +48,7 @@ export class QRangeComponent {
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null),
       validations: this.fb.group({
-        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
         max: new FormControl(this.data.validations?.max ?? null),
         min: new FormControl(this.data.validations?.min ?? null),
       })

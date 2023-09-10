@@ -1,21 +1,25 @@
 import * as AppState from '../../../../state/app.state';
 import { QuestionTypesEnum } from "src/shared/models/question.model";
 
-
-// ? union type for various q types
-// export type QuestionFormTypes =  QTextFormModel | QSingleSelectFormModel | QMultiSelectFormModel | QRangeFormModel | QTimeFormModel | QFileFormModel | QRadioFormModel;
-
-// ? new version
-export interface QuestionFormTypes<T> {
-    id: string;
-    type: QuestionTypesEnum;
-    key: string;
+export class QuestionFormTypes<T> {
+    id: string = '';
+    type!: QuestionTypesEnum;
+    key: string = '';
     values?: string[];
     validations?: T;
+
+    constructor(id?: string, type?: QuestionTypesEnum, key?: string, values?: string[], validations?: T) {
+        this.id = id!;
+        this.type = type!;
+        this.key = key!;
+        this.values = values!;
+        this.validations = validations!;
+    }
 }
 
 // ? main question store slice model
 export interface IQuestionState {
+    title: string;
     formBasedQuestions: QuestionFormTypes<any>[];
 }
 

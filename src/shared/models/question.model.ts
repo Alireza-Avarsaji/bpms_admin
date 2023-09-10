@@ -1,15 +1,19 @@
 import { QuestionFormTypes } from "src/app/layout/questions/create-question/state/question.state.model";
 
 export class QuestionModel {
+    id: string = '';
     title: string = '';
-    options: SubQuestionModel[] = [];
+    hint: string = '';
+    subQuestions: SubQuestionModel[] = [];
 }
 
 export class SubQuestionModel {
+    id!: string;
     key!: string;
     type!: QuestionTypesEnum;
     values?: string[];
     validations!:  ValidationModel[];
+    hint: string = '';
 
     constructor(init?: QuestionFormTypes<any>) {
         this.values = [];
@@ -52,6 +56,10 @@ export enum ValidationTypeEnum {
     multi_select_length,
     file_size,
     regex,
-    extension
+    extension,
+    maxH,
+    minH,
+    maxM,
+    minM
 }
 

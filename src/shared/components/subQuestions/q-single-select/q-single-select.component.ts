@@ -10,6 +10,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { Subscription } from 'rxjs';
 import { QSingleSelectValidationModel } from './q-single-select.models';
 import { QuestionFormTypes } from 'src/app/layout/questions/create-question/state/question.state.model';
+import { CheckTruthyPipe } from 'src/shared/pipes/check-truthy.pipe';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class QSingleSelectComponent {
   form!: FormGroup;
   subscription!: Subscription;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private checkTruthyPipe: CheckTruthyPipe) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -47,13 +48,6 @@ export class QSingleSelectComponent {
   }
 
   initForm() {
-    // this.form = this.fb.group({
-    //   id: new FormControl(this.id),
-    //   type: new FormControl(QuestionTypesEnum.single_select),
-    //   key: new FormControl(null),
-    //   values: new FormControl([]),
-    //   isRequired: new FormControl(null),
-    // });
 
     this.form = this.fb.group({
       id: new FormControl(this.data.id ?? null),
@@ -61,7 +55,7 @@ export class QSingleSelectComponent {
       key: new FormControl(this.data.key ?? null),
       values: new FormControl(this.data.values ?? []),
       validations: this.fb.group({
-        isRequired: new FormControl(this.data.validations?.isRequired ?? null),
+        isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
       })
     });
     

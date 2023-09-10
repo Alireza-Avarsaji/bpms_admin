@@ -1,7 +1,7 @@
 import { ValidationModel, ValidationTypeEnum } from "src/shared/models/question.model";
 
 export class QTimeValidationModel {
-    isRequired: boolean | null = null; 
+    isRequired: string | null = null; 
     maxH: number | null = null;
     maxM: number | null = null;
     minH: number | null = null;
@@ -16,9 +16,9 @@ export class QTimeValidationModel {
 export const getTimeValidationDto = (validations: QTimeValidationModel) => {
     return [
         new ValidationModel(ValidationTypeEnum.isRequired, String(validations.isRequired)),
-        new ValidationModel(ValidationTypeEnum.max, String(validations.maxH)),
-        new ValidationModel(ValidationTypeEnum.max, String(validations.maxM)),
-        new ValidationModel(ValidationTypeEnum.max, String(validations.minH)),
-        new ValidationModel(ValidationTypeEnum.max, String(validations.minM)),
+        new ValidationModel(ValidationTypeEnum.maxH, String(validations.maxH)),
+        new ValidationModel(ValidationTypeEnum.maxM, String(validations.maxM)),
+        new ValidationModel(ValidationTypeEnum.minH, String(validations.minH)),
+        new ValidationModel(ValidationTypeEnum.minM, String(validations.minM)),
     ];
 }

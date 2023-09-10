@@ -5,7 +5,7 @@ import { IQuestionState } from "./question.state.model";
 const getQuestionFeatureState = createFeatureSelector<IQuestionState>('questions');
 
 // ? form Based questions list selector 
-export const getFormBasedQuestions = createSelector(
+export const getQuestionState = createSelector(
     getQuestionFeatureState,
-    state => state.formBasedQuestions
+    state => state
 );
