@@ -115,3 +115,17 @@ button {
 .mat-form-field-subscript-wrapper {
   margin: 0px !important;
 }
+
+
+.mdc-list-item__primary-text {
+  display: flex;
+  cursor: pointer;
+}
+
+.mat-mdc-list-item {
+  cursor: pointer !important;
+}
+
+.pointer{
+  cursor: pointer;
+}

@@ -15,26 +15,26 @@
             </div>
 
             <!--? Form  -->
-            <form
+            <form [formGroup]="filterForm"
                 class="d-flex flex-wrap col-12 justify-content-center align-items-start mx-0 mt-2 pb-4 pr-2 search-form">
 
                 <!--? Nickname -->
                 <mat-form-field appearance="outline"
                     class="col-12 justify-content-between align-items-start mx-0 mb-2 p-0">
-                    <input matInput disable placeholder="Nick Name">
-                    <mat-icon matSuffix class="secondary__default">search</mat-icon>
+                    <input formControlName="searchTerm" matInput disable placeholder="عنوان سوال">
+                    <mat-icon matSuffix>search</mat-icon>
                 </mat-form-field>
 
+                <!--? Accept Btn  -->
+                <div class="col-12 d-flex flex-nowrap justify-content-center align-items-center">
+                    <button type="submit" mat-raised-button class="col-4 col-sm-12 col-xs-12 p-0 bg-neutral_variant__shade-10 rad-36"
+                        (click)="search();question.toggle()">
+                        <span class="system_color__white">جستجو</span>
+                    </button>
+                </div>
 
             </form>
 
-            <!--? Accept Btn  -->
-            <div class="col-12 d-flex flex-nowrap justify-content-center align-items-center">
-                <button mat-raised-button class="col-4 col-sm-12 col-xs-12 p-0 bg-secondary__default rad-36"
-                    (click)="question.toggle()">
-                    <span class="system_color__white">Search</span>
-                </button>
-            </div>
 
         </div>
 
@@ -55,7 +55,7 @@
             <main class="col-12 w-100 main-table table-container">
 
                 <!-- ? Table -->
-                <table mat-table *ngIf="questions" [dataSource]="questions" class="mat-elevation-z8">
+                <table mat-table *ngIf="questions" [dataSource]="questions.items" class="mat-elevation-z8">
 
                     <!-- ? Username Column -->
                     <ng-container matColumnDef="نام">
@@ -88,7 +88,7 @@
             <!-- ? Paginator -->
             <div *ngIf="questions"
                 class="paginator d-flex flex-wrap col-12 justify-content-end align-content-center mx-0 px-2 pt-2">
-                <app-paging class="col-12 p-0" [totalPages]="2" [currentPage]="1" (clicked)="search($event)">
+                <app-paging class="col-12 p-0" [totalPages]="questions.totalPages" [currentPage]="questions.pageIndex" (clicked)="search($event)">
                 </app-paging>
             </div>
 

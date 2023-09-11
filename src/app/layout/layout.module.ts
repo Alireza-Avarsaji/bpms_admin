@@ -4,6 +4,8 @@ import { LayoutComponent } from './layout.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import { SharedModule } from 'src/shared/shared.module';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const routes: Routes = [
   {
@@ -26,7 +28,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatSidenavModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
+    MatListModule,
+    MatExpansionModule
   ],
   providers: [],
 })

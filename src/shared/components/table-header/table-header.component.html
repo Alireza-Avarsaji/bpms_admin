@@ -8,10 +8,9 @@
     <div class="d-flex flex-nowrap justify-content-end justify-content-sm-between align-items-center p-0">
 
         <!--? Remove Filter Btn  -->
-        <button mat-raised-button class="filter-btn mx-2 p-0 my-1 my-sm-0" (click)='removeFilter()' *ngIf="showButton">
-            <!-- TODO : Google Icon Should be Added -->
+        <button mat-raised-button class="filter-btn mx-2 my-1 my-sm-0 bg-neutral_variant__shade-10 system_color__white" (click)='removeFilter()' *ngIf="showButton">
             <mat-icon>close</mat-icon>
-            <span class="mr-2">Clear</span>
+            <span class="mr-2">حذف فیلتر</span>
         </button>
 
         <div class="box d-flex mx-2" *ngIf="config?.filterBtn" style="width: 10rem;">
