@@ -50,7 +50,7 @@
             </div>
 
             <div class="col-12 d-flex flex-wrap justify-content-end">
-                <button (click)="submitQuestion()" [disabled]="form.invalid && qList.length > 0" mat-flat-button class="bg-neutral_variant__shade-10 system_color__white">ثبت</button>
+                <button (click)="submitQuestion()" [disabled]="!(isQuestionValid$ | async)" mat-flat-button class="bg-neutral_variant__shade-10 system_color__white">ثبت</button>
             </div>
 
         </article>

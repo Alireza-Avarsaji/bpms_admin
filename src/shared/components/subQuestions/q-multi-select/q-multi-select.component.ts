@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -52,7 +52,7 @@ export class QMultiSelectComponent {
     this.form = this.fb.group({
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
-      key: new FormControl(this.data.key ?? null),
+      key: new FormControl(this.data.key ?? null, [Validators.required]),
       values: new FormControl(this.data.values ?? []),
       validations: this.fb.group({
         isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
@@ -78,6 +78,7 @@ export class QMultiSelectComponent {
 
   // ? emits new value to parent component
   onValueChanged(value: QuestionFormTypes<QMultiSelectValidationModel>) {
+    value.isValid = this.form.valid;
     this.valueChanged.emit(value);
   }
 

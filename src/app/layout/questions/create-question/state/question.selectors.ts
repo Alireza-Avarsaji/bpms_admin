@@ -9,3 +9,9 @@ export const getQuestionState = createSelector(
     getQuestionFeatureState,
     state => state
 );
+
+// ? checks if all sub questions are valid
+export const getQuestionIsValid = createSelector(
+    getQuestionFeatureState,
+    state => (state.formBasedQuestions.every(s => s.isValid)) && (state.formBasedQuestions.length > 0) && !!state.title
+);

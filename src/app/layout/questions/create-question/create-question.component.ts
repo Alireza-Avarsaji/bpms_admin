@@ -6,7 +6,7 @@ import { QuestionFormTypes, State } from './state/question.state.model';
 import * as QuestionActions from './state/questions.actions';
 import { v4 as uuidv4 } from 'uuid';
 import { Observable, distinctUntilChanged, map, tap } from 'rxjs';
-import { getQuestionState } from './state/question.selectors';
+import { getQuestionIsValid, getQuestionState } from './state/question.selectors';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -21,6 +21,7 @@ export class CreateQuestionComponent implements OnInit {
   QuestionMenuItems: INameValue[] = QuestionTypeList;
   questionTypeEnum = QuestionTypesEnum;
   subQuestions$!: Observable<QuestionFormTypes<any>[]>;
+  isQuestionValid$!: Observable<boolean>;
   title$!: Observable<string>;
   form!: FormGroup;
 
@@ -32,6 +33,7 @@ export class CreateQuestionComponent implements OnInit {
       tap(() => this.initForm())
     ).subscribe();
     this.subQuestions$ = this.store.select(getQuestionState).pipe(map(s => s.formBasedQuestions));
+    this.isQuestionValid$ = this.store.select(getQuestionIsValid);
     this.store.select(getQuestionState).pipe(tap(s => this.form.get('title')?.setValue(s.title))).subscribe();
     this.handleFormValueChange();
   }

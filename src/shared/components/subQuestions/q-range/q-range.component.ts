@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -33,7 +33,7 @@ export class QRangeComponent {
   subscription!: Subscription;
 
 
-  constructor(private fb: FormBuilder,private checkTruthyPipe: CheckTruthyPipe) { }
+  constructor(private fb: FormBuilder, private checkTruthyPipe: CheckTruthyPipe) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -46,7 +46,7 @@ export class QRangeComponent {
     this.form = this.fb.group({
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
-      key: new FormControl(this.data.key ?? null),
+      key: new FormControl(this.data.key ?? null, [Validators.required]),
       validations: this.fb.group({
         isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
         max: new FormControl(this.data.validations?.max ?? null),
@@ -58,6 +58,7 @@ export class QRangeComponent {
 
   // ? emits new value to parent component
   onValueChanged(value: QuestionFormTypes<QRangeValidationModel>) {
+    value.isValid = this.form.valid;
     this.valueChanged.emit(value);
   }
 

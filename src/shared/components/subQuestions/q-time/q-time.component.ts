@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -36,7 +36,7 @@ export class QTimeComponent {
   hours = Hours;
   minutes = Minutes;
 
-  constructor(private fb: FormBuilder,private checkTruthyPipe: CheckTruthyPipe) {}
+  constructor(private fb: FormBuilder, private checkTruthyPipe: CheckTruthyPipe) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -49,7 +49,7 @@ export class QTimeComponent {
     this.form = this.fb.group({
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
-      key: new FormControl(this.data.key ?? null),
+      key: new FormControl(this.data.key ?? null, [Validators.required]),
       validations: this.fb.group({
         isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
         maxH: new FormControl(this.data.validations?.maxH ?? null),
@@ -63,6 +63,7 @@ export class QTimeComponent {
 
   // ? emits new value to parent component
   onValueChanged(value: QuestionFormTypes<QTimeValidationModel>) {
+    value.isValid = this.form.valid;
     this.valueChanged.emit(value);
   }
 
