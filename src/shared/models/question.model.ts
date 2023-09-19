@@ -1,10 +1,10 @@
-import { QuestionFormTypes } from "src/app/layout/questions/create-question/state/question.state.model";
+import { FormBasedQuestion } from "src/app/layout/form/create-form/state/form.state.model";
 
 export class QuestionModel {
     id: string = '';
     title: string = '';
     hint: string = '';
-    subQuestions: SubQuestionModel[] = [];
+    questions: SubQuestionModel[] = [];
 }
 
 export class SubQuestionModel {
@@ -15,7 +15,7 @@ export class SubQuestionModel {
     validations!:  ValidationModel[];
     hint: string = '';
 
-    constructor(init?: QuestionFormTypes<any>) {
+    constructor(init?: FormBasedQuestion<any>) {
         this.values = [];
         this.key = init!.key;
         this.type = init!.type;

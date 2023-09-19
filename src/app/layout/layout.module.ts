@@ -13,8 +13,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children:[
       {
-        path: 'questions',
-        loadChildren: () => import('./questions/questions.module').then(m => m.QuestionsModule)
+        path: 'forms',
+        loadChildren: () => import('./form/forms.module').then(m => m.FormsModule)
       }
     ]
   }
