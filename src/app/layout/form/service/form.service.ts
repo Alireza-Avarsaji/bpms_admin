@@ -11,7 +11,7 @@ import { PageList } from 'src/shared/models/result-model/pageList.model';
 })
 export class FormService {
 
-  apiUrl = 'https://192.168.5.12:5001/Form';
+  apiUrl = 'https://bpms.darkube.app/Form';
 
   constructor(private httpclient: HttpClient) { }
 

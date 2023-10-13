@@ -13,6 +13,15 @@ const routes: Routes = [
     component: LayoutComponent,
     children:[
       {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'home',
+        loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+      },
+      {
         path: 'forms',
         loadChildren: () => import('./form/forms.module').then(m => m.FormsModule)
       }
