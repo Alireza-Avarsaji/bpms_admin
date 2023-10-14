@@ -6,7 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptors';
+import { authGuard } from './sign-in/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -15,8 +17,13 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'sign-in',
+    loadChildren: () => import('./sign-in/sign-in.module').then(m => m.SignInModule)
+  },
+  {
     path: 'layout',
-    loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule)
+    loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
+    canActivate: [authGuard]
   }
 ]
 
@@ -33,7 +40,13 @@ const routes: Routes = [
     StoreDevtoolsModule.instrument({ name: 'my App', maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([])
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

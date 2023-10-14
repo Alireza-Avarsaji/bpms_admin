@@ -1,0 +1,28 @@
+<section class="h-100 w-100 d-flex flex-wrap justify-content-center align-content-center">
+    <form [formGroup]="form"
+        class="d-flex flex-wrap justify-content-center align-content-center col-11 col-md-8 col-lg-4 p-4 m-auto bg-system_color__white">
+
+        <picture class="d-block mb-4 col-5 mx-1 mb-3">
+            <img src="../../assets/images/boronz-logo copy.svg">
+        </picture>
+
+        <div class="col-12 d-flex flex-wrap justify-content-center align-content-start align-items-start">
+            <mat-form-field class="col-9 mb-4" appearance="outline">
+                <mat-label>نام کاربری</mat-label>
+                <input formControlName="username" matInput type="text">
+                <mat-error>وارد کردن نام کاربری الزامی است</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-9 mb-4" appearance="outline">
+                <mat-label>رمز عبور</mat-label>
+                <input formControlName="password" matInput type="password">
+                <mat-error>وارد کردن رمز عبور الزامی است</mat-error>
+            </mat-form-field>
+        </div>
+
+        <button mat-raised-button class="col-9 bg-theme__shade-30 system_color__white">
+            ورود
+        </button>
+
+    </form>
+</section>

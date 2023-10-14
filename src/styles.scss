@@ -15,6 +15,7 @@ body {
   margin: 0;
   // font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 100% !important;
+  background-color:#F2EFE8 !important;
 }
 
 div,
@@ -163,17 +164,17 @@ button {
 }
 
 .mat-mdc-slide-toggle.mat-accent {
-  --mdc-switch-selected-focus-state-layer-color: #5B5440;
-  --mdc-switch-selected-handle-color: #5B5440;
-  --mdc-switch-selected-hover-state-layer-color: #5B5440;
-  --mdc-switch-selected-pressed-state-layer-color: #5B5440;
-  --mdc-switch-selected-focus-handle-color: #5B5440;
-  --mdc-switch-selected-hover-handle-color: #5B5440;
-  --mdc-switch-selected-pressed-handle-color: #5B5440;
-  --mdc-switch-selected-focus-track-color: #918666;
-  --mdc-switch-selected-hover-track-color: #918666;
-  --mdc-switch-selected-pressed-track-color: #918666;
-  --mdc-switch-selected-track-color: #918666;
+  --mdc-switch-selected-focus-state-layer-color: #0A1B69;
+  --mdc-switch-selected-handle-color: #0A1B69;
+  --mdc-switch-selected-hover-state-layer-color: #0A1B69;
+  --mdc-switch-selected-pressed-state-layer-color: #0A1B69;
+  --mdc-switch-selected-focus-handle-color: #0A1B69;
+  --mdc-switch-selected-hover-handle-color: #0A1B69;
+  --mdc-switch-selected-pressed-handle-color: #0A1B69;
+  --mdc-switch-selected-focus-track-color: #7F91E6;
+  --mdc-switch-selected-hover-track-color: #7F91E6;
+  --mdc-switch-selected-pressed-track-color: #7F91E6;
+  --mdc-switch-selected-track-color: #7F91E6;
 }
 
 .mat-datepicker-toggle-active {
