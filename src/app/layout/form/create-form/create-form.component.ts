@@ -1,33 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { QuestionTypeList } from 'src/shared/constants/q-types';
-import { INameValue, QuestionModel, QuestionTypesEnum } from 'src/shared/models/question.model';
+import { INameValue, FormModel, QuestionTypesEnum } from 'src/shared/models/question.model';
 import { FormBasedQuestion, State } from './state/form.state.model';
 import * as FormActions from './state/form.actions';
 import { v4 as uuidv4 } from 'uuid';
 import { Observable, distinctUntilChanged, map, tap } from 'rxjs';
-import { getFormIsValid, getFormState } from './state/form.selectors';
+import { getFormIsValid, getFormState, getPostFormError, getPostFormSuccess, getUpdateFormError, getUpdateFormSuccess } from './state/form.selectors';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
   styleUrls: ['./create-form.component.scss'],
 })
-export class CreateFormComponent implements OnInit {
+export class CreateFormComponent implements OnInit, OnDestroy {
 
-  question!: QuestionModel;
+  question!: FormModel;
   QuestionMenuItems: INameValue[] = QuestionTypeList;
   questionTypeEnum = QuestionTypesEnum;
   questions$!: Observable<FormBasedQuestion<any>[]>;
-  isQuestionValid$!: Observable<boolean>;
+  isFormValid$!: Observable<boolean>;
   title$!: Observable<string>;
   form!: FormGroup;
+  mode: 'create' | 'update' = 'create';
 
 
-  constructor(private store: Store<State>, private fb: FormBuilder, private activeRoute: ActivatedRoute ) { }
+  constructor(
+    private store: Store<State>,
+    private fb: FormBuilder,
+    private activeRoute: ActivatedRoute,
+    private _snackBar: MatSnackBar,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.checkRoute().pipe(
@@ -35,17 +43,22 @@ export class CreateFormComponent implements OnInit {
     ).subscribe();
 
     this.questions$ = this.store.select(getFormState).pipe(map(s => s.formBasedQuestions));
-    this.isQuestionValid$ = this.store.select(getFormIsValid);
+    this.isFormValid$ = this.store.select(getFormIsValid);
     this.store.select(getFormState).pipe(tap(s => this.form.get('title')?.setValue(s.title))).subscribe();
     this.store.select(getFormState).pipe(tap(s => this.form.get('hint')?.setValue(s.hint))).subscribe();
     this.handleFormValueChange();
+    this.handlePostFormSuccess().subscribe();
+    this.handlePostFormError().subscribe();
+    this.handleUpdateFormSuccess().subscribe();
+    this.handleUpdateFormError().subscribe();
   }
 
   checkRoute() {
     return this.activeRoute.params.pipe(
-      tap(param => {    
-        if(param['id']) {
-          this.store.dispatch(FormActions.loadForm({id: param['id']}));
+      tap(param => {
+        if (param['id']) {
+          this.mode = 'update';
+          this.store.dispatch(FormActions.loadForm({ id: param['id'] }));
         }
       })
     );
@@ -62,12 +75,12 @@ export class CreateFormComponent implements OnInit {
     this.form.get('title')?.valueChanges.pipe(
       distinctUntilChanged()
     ).subscribe(value => {
-      this.store.dispatch(FormActions.UpdateFormTitle({title: value}));
+      this.store.dispatch(FormActions.UpdateFormTitle({ title: value }));
     });
     this.form.get('hint')?.valueChanges.pipe(
       distinctUntilChanged()
     ).subscribe(value => {
-      this.store.dispatch(FormActions.UpdateFormHint({hint: value}));
+      this.store.dispatch(FormActions.UpdateFormHint({ hint: value }));
     });
   }
 
@@ -80,7 +93,7 @@ export class CreateFormComponent implements OnInit {
   }
 
   public removeSubQuestion(sub: FormBasedQuestion<any>) {
-    this.store.dispatch(FormActions.RemoveQuestion({id: sub.id}));
+    this.store.dispatch(FormActions.RemoveQuestion({ id: sub.id }));
   }
 
 
@@ -100,12 +113,82 @@ export class CreateFormComponent implements OnInit {
     );
   }
 
+  public submitForm() {
+    if (this.mode == 'create')
+      this.store.dispatch(FormActions.postForm());
+    else
+      this.store.dispatch(FormActions.updateForm());
+  }
 
-  public submitQuestion() {
-    this.store.dispatch(FormActions.postForm());
+  handlePostFormSuccess() {
+
+    return this.store.select(getPostFormSuccess).pipe(
+      tap(success => {
+        if (success) {
+          this._snackBar.open(
+            'با موفقیت ثبت شد', undefined, {
+            duration: 3500
+          }
+          );
+          this.router.navigate(['/layout/forms'], { queryParams: { page: 1 } });
+        }
+      })
+    )
+
+  }
+
+  handlePostFormError() {
+    return this.store.select(getPostFormError).pipe(
+      tap(error => {
+        if (error) {
+          this._snackBar.open(
+            'عملیات با خطا مواجه شد', undefined, {
+            duration: 2500
+          }
+          );
+        }
+      })
+    )
+  }
+
+  handleUpdateFormSuccess() {
+
+    return this.store.select(getUpdateFormSuccess).pipe(
+      tap(success => {
+        if (success) {
+          this._snackBar.open(
+            'با موفقیت ثبت شد', undefined, {
+            duration: 3500
+          }
+          );
+          this.router.navigate(['/layout/forms'], { queryParams: { page: 1 } });
+        }
+      })
+    )
+
+  }
+
+  handleUpdateFormError() {
+    return this.store.select(getUpdateFormError).pipe(
+      tap(error => {
+        if (error) {
+          this._snackBar.open(
+            'عملیات با خطا مواجه شد', undefined, {
+            duration: 2500
+          }
+          );
+        }
+      })
+    )
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    this.store.dispatch(FormActions.reorder({prevIndex: event.previousIndex, currentIndex: event.currentIndex}))
+    this.store.dispatch(FormActions.reorderQuestions({ prevIndex: event.previousIndex, currentIndex: event.currentIndex }))
   }
+
+
+  ngOnDestroy(): void {
+    this.store.dispatch(FormActions.clearCurrentForm());
+  }
+
 }

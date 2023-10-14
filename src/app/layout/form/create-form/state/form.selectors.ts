@@ -15,3 +15,8 @@ export const getFormIsValid = createSelector(
     getFormsFeatureState,
     state => (state.formBasedQuestions.every(s => s.isValid)) && (state.formBasedQuestions.length > 0) && !!state.title
 );
+
+export const getPostFormSuccess = createSelector(getFormsFeatureState, state => state.postFormSuccess);
+export const getPostFormError = createSelector(getFormsFeatureState, state => state.postFormError);
+export const getUpdateFormSuccess = createSelector(getFormsFeatureState, state => state.updateFormSuccess);
+export const getUpdateFormError = createSelector(getFormsFeatureState, state => state.updateFormError);

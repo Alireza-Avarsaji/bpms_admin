@@ -62,7 +62,7 @@
             </div>
 
             <div class="col-12 d-flex flex-wrap justify-content-end">
-                <button (click)="submitQuestion()" [disabled]="!(isQuestionValid$ | async)" mat-flat-button class="bg-theme__shade-10 system_color__white">ثبت</button>
+                <button (click)="submitForm()" [disabled]="!(isFormValid$ | async)" mat-flat-button class="bg-theme__shade-10 system_color__white">ثبت</button>
             </div>
 
         </article>

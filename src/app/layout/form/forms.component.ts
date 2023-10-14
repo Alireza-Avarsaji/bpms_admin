@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { configHeaderModel } from 'src/shared/components/table-header/table-header.component';
 import { PageFilterModel } from 'src/shared/models/filter-models/pageFilter.model';
-import { QuestionModel } from 'src/shared/models/question.model';
+import { FormModel } from 'src/shared/models/question.model';
 import { PageList } from 'src/shared/models/result-model/pageList.model';
 import { FormService } from './service/form.service';
 import { switchMap, tap } from 'rxjs';
@@ -27,7 +27,7 @@ export class FormsComponent implements OnInit {
   filterForm!: FormGroup;
 
 
-  questions: PageList<QuestionModel> = new PageList<QuestionModel>();
+  questions: PageList<FormModel> = new PageList<FormModel>();
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private service: FormService) { }
 

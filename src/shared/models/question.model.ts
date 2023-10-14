@@ -1,6 +1,6 @@
 import { FormBasedQuestion } from "src/app/layout/form/create-form/state/form.state.model";
 
-export class QuestionModel {
+export class FormModel {
     id: string = '';
     title: string = '';
     hint: string = '';

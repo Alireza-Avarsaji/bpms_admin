@@ -20,6 +20,8 @@ import { QSingleSelectComponent } from 'src/shared/components/Question-templates
 import { QTextComponent } from 'src/shared/components/Question-templates/q-text/q-text.component';
 import { QTimeComponent } from 'src/shared/components/Question-templates/q-time/q-time.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 
@@ -44,6 +46,7 @@ const routes: Routes = [
     MatButtonModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatSnackBarModule,
     NgxSkeletonLoaderModule,
     MatMenuModule,
     DragDropModule,

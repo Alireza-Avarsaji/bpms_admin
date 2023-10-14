@@ -7,7 +7,12 @@ import { moveItemInArray } from "@angular/cdk/drag-drop";
 const initialState: IFormState = {
     title: '',
     hint: '',
-    formBasedQuestions: []
+    id: '',
+    formBasedQuestions: [],
+    postFormSuccess: false,
+    postFormError: false,
+    updateFormSuccess: false,
+    updateFormError: false,
 }
 
 export const formReducer = createReducer(initialState,
@@ -59,6 +64,17 @@ export const formReducer = createReducer(initialState,
         }
     ),
 
+    // ? update a form id
+    on(
+        FormActions.UpdateFormId,
+        (state, action): IFormState => {
+            return {
+                ...state,
+                id: action.id
+            }
+        }
+    ),
+
     // ? update a form title
     on(
         FormActions.UpdateFormTitle,
@@ -81,23 +97,51 @@ export const formReducer = createReducer(initialState,
         }
     ),
 
-    // // ? post question(has effect)
-    // on(
-    //     FormActions.postForm,
-    //     (state, action): IFormState => {
-    //         return {
-    //             ...state
-    //         }
-    //     }
-    // ),
 
-    // ? post question success
+    // ? post form success
     on(
         FormActions.postFormSuccess,
-        (state, action): IFormState => {
+        (state): IFormState => {
+
             return {
                 ...state,
-                title: action.title
+                postFormSuccess: true
+            }
+        }
+    ),
+
+    // ? post form error
+    on(
+        FormActions.postFormError,
+        (state): IFormState => {
+
+            return {
+                ...state,
+                postFormError: true
+            }
+        }
+    ),
+
+    // ? update form success
+    on(
+        FormActions.updateFormSuccess,
+        (state): IFormState => {
+
+            return {
+                ...state,
+                updateFormSuccess: true
+            }
+        }
+    ),
+
+    // ? update form error
+    on(
+        FormActions.updateFormError,
+        (state): IFormState => {
+
+            return {
+                ...state,
+                updateFormError: true
             }
         }
     ),
@@ -117,7 +161,7 @@ export const formReducer = createReducer(initialState,
         FormActions.loadFormSuccess,
         (state): IFormState => {
             return {
-                ...state,
+                ...state
             }
         }
     ),
@@ -132,18 +176,35 @@ export const formReducer = createReducer(initialState,
         }
     ),
 
-        // ? load question error
-        on(
-            FormActions.reorder,
-            (state, action): IFormState => {
-                const clone = [...state.formBasedQuestions];
-                moveItemInArray(clone, action.prevIndex, action.currentIndex);
-                return {
-                    ...state,
-                    formBasedQuestions: clone
-                }
+    // ? reorder form questions
+    on(
+        FormActions.reorderQuestions,
+        (state, action): IFormState => {
+            const clone = [...state.formBasedQuestions];
+            moveItemInArray(clone, action.prevIndex, action.currentIndex);
+            return {
+                ...state,
+                formBasedQuestions: clone
             }
-        ),
+        }
+    ),
+
+    on(
+        FormActions.clearCurrentForm,
+        (state) => {
+            return {
+                ...state,
+                formBasedQuestions: initialState.formBasedQuestions,
+                hint: initialState.hint,
+                id: initialState.id,
+                postFormError: initialState.postFormError,
+                postFormSuccess: initialState.postFormSuccess,
+                title: initialState.title,
+                updateFormError: initialState.updateFormError,
+                updateFormSuccess: initialState.updateFormSuccess
+            }
+        }
+    ),
 
 
 

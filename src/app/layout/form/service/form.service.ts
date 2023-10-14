@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PageFilterModel } from 'src/shared/models/filter-models/pageFilter.model';
-import { QuestionModel } from 'src/shared/models/question.model';
+import { FormModel } from 'src/shared/models/question.model';
 import { TSResult } from 'src/shared/models/result-model/TServiceResult';
 import { PageList } from 'src/shared/models/result-model/pageList.model';
 
@@ -15,17 +15,21 @@ export class FormService {
 
   constructor(private httpclient: HttpClient) { }
 
-  postForm(body: QuestionModel): Observable<TSResult<string>> {
+  postForm(body: FormModel): Observable<TSResult<string>> {
     return this.httpclient.post<TSResult<string>>(`${this.apiUrl}/CreateForm`, body);
   }
 
-  getFormById(id: string): Observable<TSResult<QuestionModel>> {
-    return this.httpclient.get<TSResult<QuestionModel>>(`${this.apiUrl}/GetForm/${id}`);
+  updateFormById(body: FormModel): Observable<TSResult<string>> {
+    return this.httpclient.put<TSResult<string>>(`${this.apiUrl}/UpdateForm`, body);
   }
 
-  getformsByFilter(body: PageFilterModel, searchTerm: string): Observable<TSResult<PageList<QuestionModel>>> {
+  getFormById(id: string): Observable<TSResult<FormModel>> {
+    return this.httpclient.get<TSResult<FormModel>>(`${this.apiUrl}/GetForm/${id}`);
+  }
+
+  getformsByFilter(body: PageFilterModel, searchTerm: string): Observable<TSResult<PageList<FormModel>>> {
     const query = searchTerm ? `?title=${searchTerm}` : '';
-    return this.httpclient.post<TSResult<PageList<QuestionModel>>>(`${this.apiUrl}/GetFormByFilter${query}`, body);
+    return this.httpclient.post<TSResult<PageList<FormModel>>>(`${this.apiUrl}/GetFormByFilter${query}`, body);
   }
 
 

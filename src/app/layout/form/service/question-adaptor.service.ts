@@ -55,7 +55,7 @@ export class QuestionAdaptorService {
       min,
       regex
     };
-    const question: FormBasedQuestion<QTextValidationModel> = new FormBasedQuestion<QTextValidationModel>(q.id, q.type, q.key, q.values, validations);
+    const question: FormBasedQuestion<QTextValidationModel> = new FormBasedQuestion<QTextValidationModel>(q.id, q.type, q.key, q.hint, true,  q.values, validations);
     this.store.dispatch(FormActions.AddQuestion({ formValue: question }));
   }
 
@@ -66,7 +66,7 @@ export class QuestionAdaptorService {
     const validations = {
       isRequired
     };
-    const question: FormBasedQuestion<QSingleSelectValidationModel> = new FormBasedQuestion<QSingleSelectValidationModel>(q.id, q.type, q.key, q.values, validations);
+    const question: FormBasedQuestion<QSingleSelectValidationModel> = new FormBasedQuestion<QSingleSelectValidationModel>(q.id, q.type, q.key, q.hint, true,  q.values, validations);
     this.store.dispatch(FormActions.AddQuestion({ formValue: question }));
   }
 
@@ -79,7 +79,7 @@ export class QuestionAdaptorService {
       isRequired,
       max,
     };
-    const question: FormBasedQuestion<QMultiSelectValidationModel> = new FormBasedQuestion<QMultiSelectValidationModel>(q.id, q.type, q.key, q.values, validations);
+    const question: FormBasedQuestion<QMultiSelectValidationModel> = new FormBasedQuestion<QMultiSelectValidationModel>(q.id, q.type, q.key, q.hint, true,  q.values, validations);
     this.store.dispatch(FormActions.AddQuestion({ formValue: question }));
   }
 
@@ -98,7 +98,7 @@ export class QuestionAdaptorService {
       minH,
       minM
     };
-    const question: FormBasedQuestion<QTimeValidationModel> = new FormBasedQuestion<QTimeValidationModel>(q.id, q.type, q.key, q.values, validations);
+    const question: FormBasedQuestion<QTimeValidationModel> = new FormBasedQuestion<QTimeValidationModel>(q.id, q.type, q.key, q.hint, true,  q.values, validations);
     this.store.dispatch(FormActions.AddQuestion({ formValue: question }));
   }
 
@@ -113,7 +113,7 @@ export class QuestionAdaptorService {
       max,
       min
     };
-    const question: FormBasedQuestion<QRangeValidationModel> = new FormBasedQuestion<QRangeValidationModel>(q.id, q.type, q.key, q.values, validations);
+    const question: FormBasedQuestion<QRangeValidationModel> = new FormBasedQuestion<QRangeValidationModel>(q.id, q.type, q.key, q.hint, true,  q.values, validations);
     this.store.dispatch(FormActions.AddQuestion({ formValue: question }));
   }
 
@@ -124,7 +124,7 @@ export class QuestionAdaptorService {
     const validations = {
       isRequired
     };
-    const question: FormBasedQuestion<QRadioValidationModel> = new FormBasedQuestion<QRadioValidationModel>(q.id, q.type, q.key, q.values, validations);
+    const question: FormBasedQuestion<QRadioValidationModel> = new FormBasedQuestion<QRadioValidationModel>(q.id, q.type, q.key, q.hint, true,  q.values, validations);
     this.store.dispatch(FormActions.AddQuestion({ formValue: question }));
   }
 
@@ -139,7 +139,7 @@ export class QuestionAdaptorService {
       maxSize,
       extension
     };
-    const question: FormBasedQuestion<QFileValidationModel> = new FormBasedQuestion<QFileValidationModel>(q.id, q.type, q.key, q.values, validations);
+    const question: FormBasedQuestion<QFileValidationModel> = new FormBasedQuestion<QFileValidationModel>(q.id, q.type, q.key, q.hint, true,  q.values, validations);
     this.store.dispatch(FormActions.AddQuestion({ formValue: question }));
   }
 
@@ -154,7 +154,7 @@ export class QuestionAdaptorService {
         max,
         min
       };
-      const question: FormBasedQuestion<QDateValidationModel> = new FormBasedQuestion<QDateValidationModel>(q.id, q.type, q.key, q.values, validations);
+      const question: FormBasedQuestion<QDateValidationModel> = new FormBasedQuestion<QDateValidationModel>(q.id, q.type, q.key, q.hint, true,  q.values, validations);
       this.store.dispatch(FormActions.AddQuestion({ formValue: question }));
     }
 

@@ -26,18 +26,34 @@ export const UpdateFormHint = createAction(
     props<{ hint: string }>()
 );
 
+export const UpdateFormId = createAction(
+    '[Form] UpdateFormId',
+    props<{ id: string }>()
+);
+
 export const postForm = createAction(
     '[Form] postForm'
 );
 
+
 export const postFormSuccess = createAction(
-    '[Form] postFormSuccess',
-    props<any>()
+    '[Form] postFormSuccess'
 );
 
 export const postFormError = createAction(
-    '[Form] postFormError',
-    props<any>()
+    '[Form] postFormError'
+);
+
+export const updateForm = createAction(
+    '[Form] updateForm'
+);
+
+export const updateFormSuccess = createAction(
+    '[Form] updateFormSuccess'
+);
+
+export const updateFormError = createAction(
+    '[Form] updateFormError'
 );
 
 export const loadForm = createAction(
@@ -53,7 +69,11 @@ export const loadFormError = createAction(
     '[Form] loadFormError'
 );
 
-export const reorder = createAction(
-    '[Form] reorder',
+export const reorderQuestions = createAction(
+    '[Form] reorderQuestions',
     props<{prevIndex: number ,currentIndex: number}>()
+);
+
+export const clearCurrentForm = createAction(
+    '[form] clearCurrentForm'
 );
