@@ -1,6 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { IFormState } from "./form.state.model";
 import * as FormActions from './form.actions'
+import { moveItemInArray } from "@angular/cdk/drag-drop";
 
 
 const initialState: IFormState = {
@@ -130,6 +131,19 @@ export const formReducer = createReducer(initialState,
             }
         }
     ),
+
+        // ? load question error
+        on(
+            FormActions.reorder,
+            (state, action): IFormState => {
+                const clone = [...state.formBasedQuestions];
+                moveItemInArray(clone, action.prevIndex, action.currentIndex);
+                return {
+                    ...state,
+                    formBasedQuestions: clone
+                }
+            }
+        ),
 
 
 

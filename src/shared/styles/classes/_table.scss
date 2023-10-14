@@ -12,10 +12,10 @@
 
 //? Table Classes
 .table-container {
-    &::-webkit-scrollbar-thumb {
-        background-color: setColor(primary, shade-90);
-        border-radius: 4px !important;
-    }
+    // &::-webkit-scrollbar-thumb {
+    //     background-color: setColor(primary, shade-90);
+    //     border-radius: 4px !important;
+    // }
     max-height: calc(100% - 101px);
     // border-radius: 0px 0px 3px 3px !important;
 

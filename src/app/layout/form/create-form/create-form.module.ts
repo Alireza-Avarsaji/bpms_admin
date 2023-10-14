@@ -19,6 +19,7 @@ import { QRangeComponent } from 'src/shared/components/Question-templates/q-rang
 import { QSingleSelectComponent } from 'src/shared/components/Question-templates/q-single-select/q-single-select.component';
 import { QTextComponent } from 'src/shared/components/Question-templates/q-text/q-text.component';
 import { QTimeComponent } from 'src/shared/components/Question-templates/q-time/q-time.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
@@ -45,6 +46,7 @@ const routes: Routes = [
     MatInputModule,
     NgxSkeletonLoaderModule,
     MatMenuModule,
+    DragDropModule,
     QTextComponent,
     QSingleSelectComponent,
     QMultiSelectComponent,

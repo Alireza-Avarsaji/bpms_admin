@@ -52,3 +52,8 @@ export const loadFormSuccess = createAction(
 export const loadFormError = createAction(
     '[Form] loadFormError'
 );
+
+export const reorder = createAction(
+    '[Form] reorder',
+    props<{prevIndex: number ,currentIndex: number}>()
+);

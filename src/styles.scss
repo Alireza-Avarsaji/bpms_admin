@@ -85,7 +85,7 @@ button {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: setColor(primary, shade-90);
+    background-color: #E4DFD1;
     border-radius: 24px;
   }
 }
@@ -137,3 +137,71 @@ button {
 .mat-mdc-form-field-hint-wrapper {
   padding: 0 !important;
 }
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading {
+  border-color: #918666;
+
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: #918666;
+
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch {
+  border-color: #918666;
+
+}
+
+.mdc-text-field .mdc-text-field__input {
+  caret-color: #918666;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: #5B5440;
+
+}
+
+.mat-mdc-slide-toggle.mat-accent {
+  --mdc-switch-selected-focus-state-layer-color: #5B5440;
+  --mdc-switch-selected-handle-color: #5B5440;
+  --mdc-switch-selected-hover-state-layer-color: #5B5440;
+  --mdc-switch-selected-pressed-state-layer-color: #5B5440;
+  --mdc-switch-selected-focus-handle-color: #5B5440;
+  --mdc-switch-selected-hover-handle-color: #5B5440;
+  --mdc-switch-selected-pressed-handle-color: #5B5440;
+  --mdc-switch-selected-focus-track-color: #918666;
+  --mdc-switch-selected-hover-track-color: #918666;
+  --mdc-switch-selected-pressed-track-color: #918666;
+  --mdc-switch-selected-track-color: #918666;
+}
+
+.mat-datepicker-toggle-active {
+  color: #918666;
+}
+
+.mat-calendar-body-selected {
+  background-color: #918666;
+  color: #fff;
+}
+
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  background-color: #D7D0B9;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  background-color: #E4DFD1;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
+  color: #918666 !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after {
+  color: #918666 !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: #918666 !important;
+}
+

@@ -9,6 +9,7 @@ import { Observable, distinctUntilChanged, map, tap } from 'rxjs';
 import { getFormIsValid, getFormState } from './state/form.selectors';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-create-form',
@@ -20,7 +21,7 @@ export class CreateFormComponent implements OnInit {
   question!: QuestionModel;
   QuestionMenuItems: INameValue[] = QuestionTypeList;
   questionTypeEnum = QuestionTypesEnum;
-  subQuestions$!: Observable<FormBasedQuestion<any>[]>;
+  questions$!: Observable<FormBasedQuestion<any>[]>;
   isQuestionValid$!: Observable<boolean>;
   title$!: Observable<string>;
   form!: FormGroup;
@@ -32,7 +33,8 @@ export class CreateFormComponent implements OnInit {
     this.checkRoute().pipe(
       tap(() => this.initForm())
     ).subscribe();
-    this.subQuestions$ = this.store.select(getFormState).pipe(map(s => s.formBasedQuestions));
+
+    this.questions$ = this.store.select(getFormState).pipe(map(s => s.formBasedQuestions));
     this.isQuestionValid$ = this.store.select(getFormIsValid);
     this.store.select(getFormState).pipe(tap(s => this.form.get('title')?.setValue(s.title))).subscribe();
     this.store.select(getFormState).pipe(tap(s => this.form.get('hint')?.setValue(s.hint))).subscribe();
@@ -81,6 +83,7 @@ export class CreateFormComponent implements OnInit {
     this.store.dispatch(FormActions.RemoveQuestion({id: sub.id}));
   }
 
+
   trackById(index: number, item: FormBasedQuestion<any>) {
     return item.id;
   }
@@ -100,5 +103,9 @@ export class CreateFormComponent implements OnInit {
 
   public submitQuestion() {
     this.store.dispatch(FormActions.postForm());
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    this.store.dispatch(FormActions.reorder({prevIndex: event.previousIndex, currentIndex: event.currentIndex}))
   }
 }

@@ -19,11 +19,12 @@
     </div>
 
 
-    <ng-container *ngIf="subQuestions$ | async as qList">
-        <article class="h-100 col-12 col-md-9 col-lg-7 d-flex flex-wrap justify-content-center align-content-start"
+    <ng-container *ngIf="questions$ | async as qList">
+        <!-- <ng-container *ngIf="qlis"> -->
+        <article class="h-100 col-12 col-md-9 col-lg-7 d-flex flex-wrap justify-content-center align-content-start" cdkDropList (cdkDropListDropped)="drop($event)"
             *ngIf="qList.length > 0 else placeholder">
 
-            <div *ngFor="let sub of qList; let i = index; trackBy: trackById" [ngSwitch]="sub.type" class="col-12 mb-5 question-con bg-system_color__white">
+            <div cdkDrag *ngFor="let sub of qList; let i = index; trackBy: trackById" [ngSwitch]="sub.type" class="col-12 mb-5 question-con bg-system_color__white">
 
                 <div class="col-12 d-flex justify-content-between align-items-center mb-3">
                     <label class="neutral_variant__shade-10">سوال شماره {{i + 1}}</label>
@@ -61,7 +62,7 @@
             </div>
 
             <div class="col-12 d-flex flex-wrap justify-content-end">
-                <button (click)="submitQuestion()" [disabled]="!(isQuestionValid$ | async)" mat-flat-button class="bg-neutral_variant__shade-10 system_color__white">ثبت</button>
+                <button (click)="submitQuestion()" [disabled]="!(isQuestionValid$ | async)" mat-flat-button class="bg-theme__shade-10 system_color__white">ثبت</button>
             </div>
 
         </article>
@@ -73,7 +74,7 @@
         <p class="neutral_variant__shade-10 col-12 text-center">پرسشی موجود نیست</p>
     </ng-template>
 
-    <button mat-fab class="bg-neutral_variant__shade-10 system_color__white add-btn" [matMenuTriggerFor]="menu">
+    <button mat-fab class="bg-theme__shade-10 system_color__white add-btn" [matMenuTriggerFor]="menu">
         <mat-icon>add</mat-icon>
     </button>
 
@@ -81,8 +82,8 @@
         <button class="col-12 p-0 cursor-pointer px-3" mat-menu-item *ngFor="let item of QuestionMenuItems"
             (click)="addSubQuestion(item)">
             <div class="col-12 d-flex justify-content-between" style="cursor: pointer !important;">
-                <span>{{item.name}}</span>
-                <mat-icon class="neutral_variant__shade-10">{{item.value | qTypeIcon}}</mat-icon>
+                <span class="theme__shade-30">{{item.name}}</span>
+                <mat-icon class="theme__shade-30">{{item.value | qTypeIcon}}</mat-icon>
             </div>
         </button>
     </mat-menu>
