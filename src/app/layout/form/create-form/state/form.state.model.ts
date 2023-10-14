@@ -8,6 +8,7 @@ export class FormBasedQuestion<T> {
     values?: string[];
     validations?: T;
     isValid: boolean = false;
+    hint?: string;
 
     constructor(id?: string, type?: QuestionTypesEnum, key?: string, values?: string[], validations?: T) {
         this.id = id!;

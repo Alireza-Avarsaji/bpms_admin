@@ -25,6 +25,8 @@ export class QuestionEffects {
                     const dto = new QuestionModel();
                     dto.title = state.title;
                     dto.hint = state.hint;
+                    console.log(dto);
+                    
                     for (const sub of (state.formBasedQuestions as FormBasedQuestion<any>[])) {
                         const item = new SubQuestionModel(sub);
                         item.validations = formValidationToDtoAdaptor(sub.type, sub.validations);

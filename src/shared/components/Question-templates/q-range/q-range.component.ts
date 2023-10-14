@@ -46,6 +46,7 @@ export class QRangeComponent {
       id: new FormControl(this.data.id ?? null),
       type: new FormControl(this.data.type ?? null),
       key: new FormControl(this.data.key ?? null, [Validators.required]),
+      hint: new FormControl(this.data.hint ?? null),
       validations: this.fb.group({
         isRequired: new FormControl(this.checkTruthyPipe.transform(this.data.validations?.isRequired)),
         max: new FormControl(this.data.validations?.max ?? null),

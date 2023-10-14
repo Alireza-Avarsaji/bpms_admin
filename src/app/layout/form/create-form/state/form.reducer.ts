@@ -80,15 +80,15 @@ export const formReducer = createReducer(initialState,
         }
     ),
 
-    // ? post question(has effect)
-    on(
-        FormActions.postForm,
-        (state, action): IFormState => {
-            return {
-                ...state
-            }
-        }
-    ),
+    // // ? post question(has effect)
+    // on(
+    //     FormActions.postForm,
+    //     (state, action): IFormState => {
+    //         return {
+    //             ...state
+    //         }
+    //     }
+    // ),
 
     // ? post question success
     on(

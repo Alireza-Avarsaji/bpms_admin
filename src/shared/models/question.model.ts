@@ -20,6 +20,7 @@ export class SubQuestionModel {
         this.key = init!.key;
         this.type = init!.type;
         this.values = init!.values;
+        this.hint = init!.hint!;
     }
 }
 

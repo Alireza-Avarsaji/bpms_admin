@@ -1,27 +1,32 @@
 <form [formGroup]="form"
     class="h-100 w-100 d-flex flex-wrap justify-content-center align-content-start p-4 position-relative overflow-auto">
 
-        <mat-form-field class="col-12 col-md-9 col-lg-7 mb-3"  appearance="outline">
-            <mat-label>عنوان سوال</mat-label>
+    <div class="question-con col-12 col-md-9 col-lg-7 bg-system_color__white mb-5">
+
+        <p class="col-12 title-5 mb-4 neutral_variant__shade-10">ساخت فرم جدید</p>
+
+        <mat-form-field class="col-12 mb-4"  appearance="outline">
+            <mat-label>عنوان فرم</mat-label>
             <input formControlName="title" matInput  type="text">
             <mat-error>وارد کردن عنوان الزامی است</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="col-12 col-md-9 col-lg-7 mb-5"  appearance="outline">
+        <mat-form-field class="col-12"  appearance="outline">
             <mat-label>توضیحات</mat-label>
             <input formControlName="hint" matInput  type="text">
             <mat-error>وارد کردن توضیحات الزامی است</mat-error>
         </mat-form-field>
+    </div>
 
 
     <ng-container *ngIf="subQuestions$ | async as qList">
         <article class="h-100 col-12 col-md-9 col-lg-7 d-flex flex-wrap justify-content-center align-content-start"
             *ngIf="qList.length > 0 else placeholder">
 
-            <div *ngFor="let sub of qList; let i = index; trackBy: trackById" [ngSwitch]="sub.type" class="col-12 mb-5">
+            <div *ngFor="let sub of qList; let i = index; trackBy: trackById" [ngSwitch]="sub.type" class="col-12 mb-5 question-con bg-system_color__white">
 
                 <div class="col-12 d-flex justify-content-between align-items-center mb-3">
-                    <label class="neutral_variant__shade-10">زیر سوال شماره {{i + 1}}</label>
+                    <label class="neutral_variant__shade-10">سوال شماره {{i + 1}}</label>
                     <button (click)="removeSubQuestion(sub)" class="error__shade-50" mat-icon-button>
                         <mat-icon>close</mat-icon>
                     </button>
