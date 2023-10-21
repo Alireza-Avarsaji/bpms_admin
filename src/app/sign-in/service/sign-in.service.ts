@@ -9,7 +9,7 @@ import { tokenModel } from '../model/token.model';
 })
 export class SignInService {
 
-  authUrl = 'https://bpms2.darkube.app/'
+  authUrl = 'https://bpms2.darkube.app'
 
   constructor(http: HttpClient, private handler: HttpHandler, private storage: CustomLocalStorage) { }
 
@@ -19,12 +19,11 @@ export class SignInService {
         'Content-Type': 'application/x-www-form-urlencoded',
       })
     };
-    const data = `grant_type=password&client_id=customer&client_secret=secret&UserName=${userName}&Password=${password}`;
+    const data = `grant_type=password&client_id=mobile_client_customer&client_secret=secret&UserName=${userName}&Password=${password}`;
     const http = new HttpClient(this.handler);
     return http.post<tokenModel>(`${this.authUrl}/connect/token`, data, httpOptions).pipe(
       map(result => {
         if (result.access_token) {
-          this.storage.clearItems(['quickpay']);
           this.storage.setItem('access_token', result.access_token);
           this.storage.setItem('refresh_token', result.refresh_token);
         }

@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '',
     component: FormsComponent,
   },  {
-    path: ':id',
+    path: 'submission/:id',
     loadChildren: () => import('./submissions/submissions.module').then(m => m.FormsModule),
   },
   {

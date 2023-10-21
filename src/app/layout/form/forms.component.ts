@@ -80,7 +80,7 @@ export class FormsComponent implements OnInit {
   }
 
   navigateTosubmissions(form: FormModel) {
-    this.router.navigate(['/layout/forms', form.id])
+    this.router.navigate(['/layout/forms/submission', form.id])
   }
 
 
