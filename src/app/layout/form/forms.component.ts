@@ -20,10 +20,10 @@ export class FormsComponent implements OnInit {
     addBtn: true,
     searchBtn: true,
     excelBtn: false,
-    title: 'سوالات'
+    title: 'فرم ها'
   };
 
-  displayedColumns: string[] = ['عنوان', 'تاریخ ثبت'];
+  displayedColumns: string[] = ['عنوان', 'تاریخ ثبت', 'پاسخ‌ها'];
   filterForm!: FormGroup;
 
 
@@ -77,6 +77,10 @@ export class FormsComponent implements OnInit {
       }
     }
     this.router.navigate(['/layout/forms'], { queryParams: qparam });
+  }
+
+  navigateTosubmissions(form: FormModel) {
+    this.router.navigate(['/layout/forms', form.id])
   }
 
 

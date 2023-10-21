@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as FormActions from './form.actions';
 import { catchError, map, switchMap, withLatestFrom } from "rxjs/operators";
 import { getFormState } from "./form.selectors";
-import { FormModel, SubQuestionModel } from "src/shared/models/question.model";
+import { FormModel, QuestionModel } from "src/shared/models/question.model";
 import { formValidationToDtoAdaptor } from "../adaptors/validations.adaptor";
 import { FormService } from "../../service/form.service";
 import { of } from "rxjs";
@@ -31,7 +31,7 @@ export class QuestionEffects {
                     dto.hint = state.hint;
 
                     for (const sub of (state.formBasedQuestions as FormBasedQuestion<any>[])) {
-                        const item = new SubQuestionModel(sub);
+                        const item = new QuestionModel(sub);
                         item.validations = formValidationToDtoAdaptor(sub.type, sub.validations);
                         dto.questions.push(item);
                     }
@@ -61,7 +61,7 @@ export class QuestionEffects {
                     dto.id = state.id;
 
                     for (const sub of (state.formBasedQuestions as FormBasedQuestion<any>[])) {
-                        const item = new SubQuestionModel(sub);
+                        const item = new QuestionModel(sub);
                         item.validations = formValidationToDtoAdaptor(sub.type, sub.validations);
                         dto.questions.push(item);
                     }

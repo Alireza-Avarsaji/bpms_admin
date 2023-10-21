@@ -4,16 +4,18 @@ export class FormModel {
     id: string = '';
     title: string = '';
     hint: string = '';
-    questions: SubQuestionModel[] = [];
+    questions: QuestionModel[] = [];
 }
 
-export class SubQuestionModel {
+export class QuestionModel {
     id!: string;
     key!: string;
     type!: QuestionTypesEnum;
     values?: string[];
     validations!:  ValidationModel[];
     hint: string = '';
+    order?: number;
+    answerValue?: string;
 
     constructor(init?: FormBasedQuestion<any>) {
         this.values = [];

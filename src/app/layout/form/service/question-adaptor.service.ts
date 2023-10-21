@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormBasedQuestion, State } from '../create-form/state/form.state.model';
-import { QuestionTypesEnum, SubQuestionModel, ValidationTypeEnum } from 'src/shared/models/question.model';
+import { QuestionTypesEnum, QuestionModel, ValidationTypeEnum } from 'src/shared/models/question.model';
 import { QTextValidationModel } from 'src/shared/components/Question-templates/q-text/q-text.models';
 import * as FormActions from '../create-form/state/form.actions';
 import { QSingleSelectValidationModel } from 'src/shared/components/Question-templates/q-single-select/q-single-select.models';
@@ -19,7 +19,7 @@ export class QuestionAdaptorService {
 
   constructor(private store: Store<State>) { }
 
-  DtoToformBasedQuestionAdaptor = (sub: SubQuestionModel) => {
+  DtoToformBasedQuestionAdaptor = (sub: QuestionModel) => {
     switch (sub.type) {
       case QuestionTypesEnum.text:
         return this.getTextFormBasedValidation(sub);
@@ -41,7 +41,7 @@ export class QuestionAdaptorService {
   }
 
   // ? convert dto to formbased validation model
-  getTextFormBasedValidation = (q: SubQuestionModel) => {
+  getTextFormBasedValidation = (q: QuestionModel) => {
 
     
     
@@ -60,7 +60,7 @@ export class QuestionAdaptorService {
   }
 
   // ? convert dto to formbased validation model
-  getSingleSelectFormBasedValidation = (q: SubQuestionModel) => {
+  getSingleSelectFormBasedValidation = (q: QuestionModel) => {
 
     const isRequired = q.validations.find(v => v.type == ValidationTypeEnum.isRequired)?.value!;
     const validations = {
@@ -71,7 +71,7 @@ export class QuestionAdaptorService {
   }
 
   // ? convert dto to formbased validation model
-  getMultiSelectFormBasedValidation = (q: SubQuestionModel) => {
+  getMultiSelectFormBasedValidation = (q: QuestionModel) => {
 
     const isRequired = q.validations.find(v => v.type == ValidationTypeEnum.isRequired)?.value!;
     const max = +q.validations.find(v => v.type == ValidationTypeEnum.max)?.value!;
@@ -84,7 +84,7 @@ export class QuestionAdaptorService {
   }
 
   // ? convert dto to formbased validation model
-  getTimeFormBasedValidation = (q: SubQuestionModel) => {
+  getTimeFormBasedValidation = (q: QuestionModel) => {
 
     const isRequired = q.validations.find(v => v.type == ValidationTypeEnum.isRequired)?.value!;
     const maxH = +q.validations.find(v => v.type == ValidationTypeEnum.maxH)?.value!;
@@ -103,7 +103,7 @@ export class QuestionAdaptorService {
   }
 
   // ? convert dto to formbased validation model
-  getRangeFormBasedValidation = (q: SubQuestionModel) => {
+  getRangeFormBasedValidation = (q: QuestionModel) => {
 
     const isRequired = q.validations.find(v => v.type == ValidationTypeEnum.isRequired)?.value!;
     const max = +q.validations.find(v => v.type == ValidationTypeEnum.max)?.value!;
@@ -118,7 +118,7 @@ export class QuestionAdaptorService {
   }
 
   // ? convert dto to formbased validation model
-  getRadioFormBasedValidation = (q: SubQuestionModel) => {
+  getRadioFormBasedValidation = (q: QuestionModel) => {
 
     const isRequired = q.validations.find(v => v.type == ValidationTypeEnum.isRequired)?.value!;
     const validations = {
@@ -129,7 +129,7 @@ export class QuestionAdaptorService {
   }
 
   // ? convert dto to formbased validation model
-  getFileFormBasedValidation = (q: SubQuestionModel) => {
+  getFileFormBasedValidation = (q: QuestionModel) => {
 
     const isRequired = q.validations.find(v => v.type == ValidationTypeEnum.isRequired)?.value!;
     const maxSize = +q.validations.find(v => v.type == ValidationTypeEnum.max)?.value!;
@@ -144,7 +144,7 @@ export class QuestionAdaptorService {
   }
 
     // ? convert dto to formbased validation model
-    getDateFormBasedValidation = (q: SubQuestionModel) => {
+    getDateFormBasedValidation = (q: QuestionModel) => {
 
       const isRequired = q.validations.find(v => v.type == ValidationTypeEnum.isRequired)?.value!;
       const max = q.validations.find(v => v.type == ValidationTypeEnum.max)?.value!;
